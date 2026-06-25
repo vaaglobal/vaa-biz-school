@@ -263,6 +263,7 @@
     var noKey = !VAA.PAYSTACK_PUBLIC_KEY || VAA.PAYSTACK_PUBLIC_KEY.indexOf("REPLACE_WITH")>-1;
     if(noKey || typeof PaystackPop === "undefined"){
       postLead(Object.assign({type:"enroll", course:courseName, status:"pending_payment"}, data));
+      // Show bank transfer instructions — payment not yet made
       var box = document.getElementById("successBox");
       var ref = document.getElementById("payRef");
       if(ref) ref.textContent = "APP-" + Date.now();
@@ -285,16 +286,17 @@
     handler.openIframe();
   }
 
-  /* ---- success banner on enroll page ---- */
+  /* ---- success banner on enroll page (Paystack redirect only) ---- */
   function initSuccess(){
     var p = new URLSearchParams(location.search);
     if(p.get("status")==="success"){
-      var box = document.getElementById("successBox");
-      if(box){
-        box.classList.remove("hide");
-        var r = document.getElementById("payRef");
+      // Show paid confirmation box, hide bank transfer box
+      var boxPaid = document.getElementById("successBoxPaid");
+      if(boxPaid){
+        boxPaid.classList.remove("hide");
+        var r = document.getElementById("payRefPaid");
         if(r) r.textContent = p.get("ref")||"";
-        box.scrollIntoView({behavior:"smooth"});
+        boxPaid.scrollIntoView({behavior:"smooth"});
       }
     }
   }
