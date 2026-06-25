@@ -84,7 +84,7 @@ p{margin:0 0 1rem}
    =========================================================== */
 .nav{position:sticky;top:0;z-index:60;background:var(--black);
   border-bottom:1px solid rgba(255,255,255,.08)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:88px;gap:16px}
 .brand{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:-.02em;flex-shrink:0}
 .brand-mark{
   width:34px;height:34px;border-radius:8px;background:var(--lime);color:var(--black);
@@ -399,6 +399,6 @@ section{padding:84px 0}
 .footer .subscribe button{padding:8px 14px;background:var(--lime);color:#000;font-weight:700;font-size:.85rem;border-radius:8px;border:none;cursor:pointer}
 
 /* logo */
-.nav-logo{height:38px;width:auto;max-width:180px;object-fit:contain;display:block}
-.footer-logo{height:auto;width:180px;filter:brightness(0) invert(1);display:block;margin-bottom:8px}
+.nav-logo{height:56px;width:84px;object-fit:contain;display:block}
+.footer-logo{height:56px;width:84px;object-fit:contain;display:block;filter:brightness(0) invert(1);margin-bottom:12px}
 .brand-fallback{display:flex;align-items:center;gap:.6rem}
