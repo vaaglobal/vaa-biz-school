@@ -51,13 +51,39 @@
 <div class="container"><div class="crumb"><a href="./">Home</a> / <span>Enroll</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
-  <div id="successBox" class="form-card hide" style="border:2px solid var(--lime-deep);margin-bottom:30px">
+
+  <!-- Shown after Paystack payment is confirmed (redirect with ?status=success) -->
+  <div id="successBoxPaid" class="form-card hide" style="border:2px solid var(--lime-deep);margin-bottom:30px">
     <span class="eyebrow">Payment received</span>
     <h2 style="font-size:1.6rem">You are in. Welcome to the cohort.</h2>
     <p style="color:var(--gray)">We have your payment. Our team will reach you within two hours with your cohort details.</p>
-    <p class="form-note">Payment reference: <b id="payRef"></b></p>
+    <p class="form-note">Payment reference: <b id="payRefPaid"></b></p>
     <a class="btn btn-primary" href="contact">Get in touch with us</a>
   </div>
+
+  <!-- Shown after form submit when Paystack is not active (bank transfer flow) -->
+  <div id="successBox" class="form-card hide" style="border:2px solid var(--lime-deep);margin-bottom:30px">
+    <span class="eyebrow">Registration received</span>
+    <h2 style="font-size:1.6rem">Your spot is reserved. Complete your payment to confirm.</h2>
+    <p style="color:var(--gray)">We have received your registration. To secure your place in the cohort, kindly make a transfer of <strong>&#8358;35,000</strong> to the account details below.</p>
+
+    <div style="margin:20px 0;padding:18px 20px;background:var(--soft);border-radius:10px;border:1px solid var(--line)">
+      <p style="margin:0 0 6px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">Payment details</p>
+      <p style="margin:8px 0"><strong>Bank:</strong> Providus Bank</p>
+      <p style="margin:8px 0"><strong>Account number:</strong> 1305069196</p>
+      <p style="margin:8px 0"><strong>Account name:</strong> VAA GLOBAL TECH HUB</p>
+    </div>
+
+    <p style="color:var(--gray)">After payment, send your receipt to us via any of the channels below and we will activate your enrolment promptly.</p>
+
+    <div style="margin:16px 0">
+      <p style="margin:6px 0">&#9993;&nbsp; <a href="mailto:support@vaaglobal.tech" style="color:var(--lime-deep);font-weight:600">support@vaaglobal.tech</a></p>
+      <p style="margin:6px 0">&#128222;&nbsp; WhatsApp: <a href="https://wa.me/2349025367017" target="_blank" rel="noopener" style="color:var(--lime-deep);font-weight:600">09025367017</a></p>
+    </div>
+
+    <p class="form-note">Application reference: <b id="payRef"></b></p>
+  </div>
+
   <div class="course-layout" style="padding-top:0">
     <div class="course-body">
       <div class="section-head" style="margin-bottom:30px">
@@ -144,7 +170,7 @@
       <a href="pricing">Pricing</a>
       <a href="faq">FAQ</a>
       <a href="contact">Contact</a>
-            <a href="referral">Referral program</a>
+      <a href="referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
