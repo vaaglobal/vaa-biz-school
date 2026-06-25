@@ -10,7 +10,7 @@
   VAA.PRICE_KOBO = VAA.PRICE_NAIRA * 100;
   VAA.PAYSTACK_PUBLIC_KEY = "pk_live_REPLACE_WITH_YOUR_PAYSTACK_PUBLIC_KEY";
   // Google Apps Script web-app URL that records enrolments / leads / referrers:
-  VAA.APPS_SCRIPT_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT/exec";
+  VAA.APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxag8tKFw3Re89sq3-68wUmKqH82jZczN_3-fAOncaAe9OqlGlXP-bERhlyjiHlgm8BMA/exec";
   VAA.WHATSAPP = "2349025367017";
 
   /* ---- mobile nav ---- */
@@ -80,12 +80,94 @@
         postLead(data).then(function(){
           form.reset();
           if(btn){ btn.disabled=false; btn.textContent = btn.dataset._t; }
-          var msg = type==="subscribe" ? "Subscribed. Watch your inbox for new tracks."
-                  : type==="referral" ? "Referral request received. We'll send your code shortly."
-                  : "Message sent. Our team will reach out soon.";
+          var msg = type==="subscribe"  ? "Subscribed. Watch your inbox."
+                  : type==="referral"   ? "Request received. We will send your code shortly."
+                  : type==="contact"    ? "Message sent. Our team will reach out soon."
+                  : "Done. Our team will reach out soon.";
           toast(msg);
         });
       });
+    });
+  }
+
+  /* ---- Mini-MBA enrolment form (on mini-mba page) ---- */
+  function initMBAForm(){
+    var form    = document.getElementById("mbaEnrollForm");
+    if(!form) return;
+    var btn     = document.getElementById("mbaPayBtn");
+    var success = document.getElementById("mbaSuccessBox");
+    var planSel = document.getElementById("mba-plan");
+    var disp    = document.getElementById("mbaAmountDisplay");
+    var lbl     = document.getElementById("mbaPlanLabel");
+    var amt     = document.getElementById("mbaPriceAmt");
+
+    if(planSel){
+      planSel.addEventListener("change", function(){
+        var opt   = planSel.options[planSel.selectedIndex];
+        var price = opt ? opt.getAttribute("data-price") : null;
+        if(price){
+          if(lbl) lbl.textContent = planSel.options[planSel.selectedIndex].textContent.split("—")[0].trim();
+          if(amt) amt.textContent = "\u20a6" + Number(price).toLocaleString();
+          if(disp) disp.style.display = "block";
+          if(btn){ btn.disabled = false; btn.textContent = "Pay \u20a6" + Number(price).toLocaleString() + " & enroll"; }
+        } else {
+          if(disp) disp.style.display = "none";
+          if(btn){ btn.disabled = true; btn.textContent = "Select a payment plan above"; }
+        }
+      });
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var name  = (document.getElementById("mba-name")  || {}).value || "";
+      var phone = (document.getElementById("mba-phone") || {}).value || "";
+      var email = (document.getElementById("mba-email") || {}).value || "";
+      var plan  = planSel ? planSel.value : "";
+      var ref   = (document.getElementById("mba-ref")   || {}).value || "";
+
+      if(!name.trim() || !phone.trim() || !email.trim() || !plan){
+        alert("Please fill in all required fields and choose a payment plan.");
+        return;
+      }
+
+      var opt   = planSel ? planSel.options[planSel.selectedIndex] : null;
+      var price = opt ? Number(opt.getAttribute("data-price")) : 225000;
+      var kobo  = price * 100;
+
+      var payload = {
+        type:"mini-mba", fullname:name, email:email, phone:phone,
+        plan:plan, refcode:ref, ts:new Date().toISOString()
+      };
+
+      var noKey = !VAA.PAYSTACK_PUBLIC_KEY || VAA.PAYSTACK_PUBLIC_KEY.indexOf("REPLACE_WITH") > -1;
+      if(noKey || typeof PaystackPop === "undefined"){
+        postLead(payload);
+        if(form) form.style.display = "none";
+        if(success) success.style.display = "block";
+        return;
+      }
+
+      var handler = PaystackPop.setup({
+        key: VAA.PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: kobo,
+        currency: "NGN",
+        ref: "MBA-" + Date.now(),
+        metadata:{ custom_fields:[
+          {display_name:"Full Name",  variable_name:"fullname", value:name},
+          {display_name:"Phone",      variable_name:"phone",    value:phone},
+          {display_name:"Program",    variable_name:"program",  value:"VAA Mini-MBA"},
+          {display_name:"Plan",       variable_name:"plan",     value:plan}
+        ]},
+        callback: function(res){
+          payload.ref = res.reference; payload.status = "paid";
+          postLead(payload);
+          if(form) form.style.display = "none";
+          if(success) success.style.display = "block";
+        },
+        onClose: function(){}
+      });
+      handler.openIframe();
     });
   }
 
@@ -116,43 +198,60 @@
   function initEnroll(){
     var form = document.getElementById("enrollForm");
     if(!form) return;
-    var sel = document.getElementById("courseSelect");
-    // populate course dropdown from data
-    if(sel && window.VAA_COURSES){
-      var byDept = {};
-      window.VAA_COURSES.forEach(function(c){ (byDept[c.dept]=byDept[c.dept]||[]).push(c); });
-      Object.keys(byDept).forEach(function(d){
-        var og = document.createElement("optgroup"); og.label = d;
-        byDept[d].forEach(function(c){
-          var o = document.createElement("option"); o.value = c.slug; o.textContent = c.name; og.appendChild(o);
-        });
-        sel.appendChild(og);
-      });
-    }
-    // preselect from ?course=slug
+    var sel  = document.getElementById("courseSelect");
+    var btn  = document.getElementById("payBtn");
+    var disp = document.getElementById("priceDisplay");
+    var lbl  = document.getElementById("priceLabel");
+    var amt  = document.getElementById("priceAmount");
+
+    // DO NOT re-populate — options are already in the HTML as optgroups
+    // Just handle preselect from ?course= param
     var pre = new URLSearchParams(location.search).get("course");
-    if(pre && sel){ sel.value = pre; }
-    // prefill referral from ?ref=
+    if(pre && sel){ sel.value = pre; updatePrice(); }
+
+    // Prefill referral code from ?ref=
     var ref = new URLSearchParams(location.search).get("ref");
     var refField = document.getElementById("refCode");
     if(ref && refField){ refField.value = ref; }
+
+    // Dynamic price display when selection changes
+    function updatePrice(){
+      var opt = sel.options[sel.selectedIndex];
+      var price = opt ? opt.getAttribute("data-price") : null;
+      if(price){
+        var isMBA = sel.value === "mini-mba";
+        lbl.textContent = isMBA ? "3-Month Mini-MBA" : "5-Week Business Track";
+        amt.textContent = "₦" + Number(price).toLocaleString();
+        disp.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Pay ₦" + Number(price).toLocaleString() + " & enroll";
+        VAA.PRICE_KOBO = Number(price) * 100;
+      } else {
+        disp.style.display = "none";
+        btn.disabled = true;
+        btn.textContent = "Select a program above";
+        VAA.PRICE_KOBO = VAA.PRICE_NAIRA * 100;
+      }
+    }
+
+    if(sel){ sel.addEventListener("change", updatePrice); }
 
     form.addEventListener("submit", function(e){
       e.preventDefault();
       var data = {}; new FormData(form).forEach(function(v,k){ data[k]=v; });
       if(!data.fullname || !data.email || !data.phone || !data.course){
-        toast("Please fill in your name, email, phone and course."); return;
+        toast("Please fill in your name, email, phone and choose a program."); return;
       }
       startPayment(data);
     });
   }
 
   function startPayment(data){
-    var courseName = "";
-    if(window.VAA_COURSES){
-      var c = window.VAA_COURSES.find(function(x){ return x.slug===data.course; });
-      courseName = c ? c.name : data.course;
-    }
+    var sel = document.getElementById("courseSelect");
+    var opt = sel ? sel.options[sel.selectedIndex] : null;
+    var price = opt ? Number(opt.getAttribute("data-price")) : VAA.PRICE_NAIRA;
+    var kobo  = price * 100;
+    var courseName = opt ? opt.textContent.replace(/\s*—.*/, "").trim() : data.course;
     var meta = {
       custom_fields:[
         {display_name:"Full Name", variable_name:"fullname", value:data.fullname},
@@ -172,7 +271,7 @@
     var handler = PaystackPop.setup({
       key: VAA.PAYSTACK_PUBLIC_KEY,
       email: data.email,
-      amount: VAA.PRICE_KOBO,
+      amount: kobo,
       currency: "NGN",
       metadata: meta,
       callback: function(res){
@@ -200,6 +299,6 @@
 
   document.addEventListener("DOMContentLoaded", function(){
     initNav(); initReveal(); initForms();
-    initCatalogSearch(); initEnroll(); initSuccess();
+    initCatalogSearch(); initEnroll(); initMBAForm(); initSuccess();
   });
 })();

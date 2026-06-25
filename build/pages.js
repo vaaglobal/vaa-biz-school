@@ -345,7 +345,7 @@ function buildPricing(){
 
 /* =====================================================================  ENROLL */
 function buildEnroll(){
-  const opts = TRACKS.map(t=>`<option value="${t.slug}">${esc(t.name)}</option>`).join("");
+  const trackOpts = TRACKS.map(t=>`<option value="${t.slug}" data-price="35000">${esc(t.name)} — &#8358;35,000</option>`).join("");
   const body = `
 <div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Enroll</span></div></div>
 <section style="padding-top:24px">
@@ -353,7 +353,7 @@ function buildEnroll(){
   <div id="successBox" class="form-card hide" style="border:2px solid var(--lime-deep);margin-bottom:30px">
     <span class="eyebrow">Payment received</span>
     <h2 style="font-size:1.6rem">You are in. Welcome to the cohort.</h2>
-    <p style="color:var(--gray)">We have your payment. Our team will reach you within two hours with your cohort details. If you enrolled in a track, your program is five weeks. If you enrolled in the Mini-MBA, it is three months.</p>
+    <p style="color:var(--gray)">We have your payment. Our team will reach you within two hours with your cohort details.</p>
     <p class="form-note">Payment reference: <b id="payRef"></b></p>
     <a class="btn btn-primary" href="contact.html">Get in touch with us</a>
   </div>
@@ -361,8 +361,8 @@ function buildEnroll(){
     <div class="course-body">
       <div class="section-head" style="margin-bottom:30px">
         <span class="eyebrow">Enrollment</span>
-        <h1>Secure your spot — track or Mini-MBA</h1>
-        <p>Fill in your details and pay via Paystack. Your track is five weeks. The Mini-MBA is three months. Our team will reach you with your cohort details within two hours.</p>
+        <h1>Enroll in a business track</h1>
+        <p>Pick your trade track below, fill in your details and pay securely via Paystack. Each track is 5 weeks, focused on the business side of your specific trade.</p>
       </div>
       <div class="form-card">
         <form id="enrollForm" novalidate>
@@ -372,31 +372,46 @@ function buildEnroll(){
           </div>
           <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@email.com" required></div>
           <div class="field">
-            <label for="courseSelect">Choose your track</label>
-            <select id="courseSelect" name="course" required><option value="">Select a track...</option>${opts}</select>
+            <label for="courseSelect">Choose your business track</label>
+            <select id="courseSelect" name="course" required>
+              <option value="">Select a program...</option>
+              <optgroup label="5-Week Business Tracks — &#8358;35,000">
+                ${trackOpts}
+              </optgroup>
+              <!-- Mini-MBA has its own form on mini-mba.html -->
+            </select>
+          </div>
+          <div id="priceDisplay" style="display:none;margin:0 0 18px;padding:14px 18px;background:var(--soft);border-radius:10px;border:1px solid var(--line)">
+            <span style="font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em" id="priceLabel"></span>
+            <div style="font-size:1.8rem;font-weight:900;color:var(--ink);margin-top:4px" id="priceAmount"></div>
           </div>
           <div class="field"><label for="refCode">Referral code (optional)</label><input id="refCode" name="refcode" type="text" placeholder="Enter code if you have one"></div>
-          <button type="submit" class="btn btn-primary btn-block btn-lg">Pay ${PRICE} &amp; enroll</button>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="payBtn" disabled>Select a program above</button>
           <p class="form-note center" style="margin-top:14px">Secure payment via Paystack. Certificate included.</p>
         </form>
       </div>
     </div>
     <aside class="course-aside">
       <div class="aside-card">
-        <div class="ac-top">
-          <span class="ribbon">Enrollment fee</span>
-          <div class="price">${PRICE}</div>
-          <small>One-time &middot; certificate included</small>
+        <div class="ac-top" style="padding-bottom:16px">
+          <span class="ribbon">What you get</span>
+          <div style="margin-top:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">5-Week Track</span>
+              <span style="color:var(--lime);font-weight:800">&#8358;35,000</span>
+            </div>
+          </div>
+          <p style="font-size:.78rem;color:rgba(255,255,255,.5);margin-top:8px">Enrolling in the Mini-MBA? <a href="mini-mba.html#enroll" style="color:var(--lime)">Go to the Mini-MBA page</a>.</p>
         </div>
         <div class="ac-body">
           <ul class="ticks">
-            <li>5-week focused business track</li>
-            <li>Track: 5 weeks · Mini-MBA: 3 months</li>
-            <li>Live Q&amp;A sessions</li>
-            <li>Brand guide + business templates</li>
+            <li>Live online cohort sessions</li>
+            <li>Business templates included</li>
+            <li>Brand guide + price list</li>
             <li>Certificate of completion</li>
+            <li>Alumni community access</li>
           </ul>
-          <p class="form-note">Questions? <a href="https://wa.me/${WA}" style="color:var(--blue);font-weight:700">Chat with us</a> first.</p>
+          <p class="form-note" style="margin-top:12px">Questions? <a href="contact.html" style="color:var(--lime);font-weight:700">Talk to us first</a>.</p>
         </div>
       </div>
     </aside>
@@ -406,8 +421,8 @@ function buildEnroll(){
 
   write("enroll.html", page({
     path:"enroll.html", depth:0, paystack:true, crumb:"Enroll",
-    title:`Enroll | ${BRAND}`,
-    desc:`Enroll in a VAA Business School business track. Pay ${PRICE_PLAIN} via Paystack and join your online cohort. Business training for Nigerian artisans.`,
+    title:"Enroll | VAA Global Business School for Artisans",
+    desc:"Enroll in a 5-week business track or the 3-month Mini-MBA at VAA Global Business School. Pay via Paystack. Business training for Nigerian artisans.",
     body
   }));
 }
@@ -489,7 +504,7 @@ function buildContact(){
           <div>
             <h3 style="margin-bottom:4px">Address</h3>
             <p style="margin:0">33 Lateef Bello Street, Igando, Lagos, Nigeria</p>
-            <p style="margin:6px 0 0;font-size:.84rem;color:var(--blue);font-weight:600">Training is fully online — no need to come in person. You do not need to worry about commuting.</p>
+            <p style="margin:6px 0 0;font-size:.84rem;color:var(--blue);font-weight:600">Training is fully online — we know your time is valuable and getting across Lagos is not always easy.</p>
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
 
 <style>
 /* ===================== TOKENS ===================== */
@@ -310,7 +311,7 @@ section{padding:88px 0}
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="index.html" aria-label="VAA Global Business School">
-      <span class="brand-mark">V</span>
+      <img src="assets/img/vaa-logo.png" alt="VAA Global" style="height:36px;width:auto;object-fit:contain;display:block" onerror="this.style.display='none'">
       <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
     </a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -323,7 +324,7 @@ section{padding:88px 0}
       <li><a href="contact.html">Contact</a></li>
     </ul></nav>
     <div class="nav-cta">
-      <a class="btn btn-outline-lime" href="enroll.html">Enroll now</a>
+      <a class="btn btn-outline-lime" href="#enroll">Enroll in Mini-MBA</a>
     </div>
   </div>
 </header>
@@ -345,7 +346,7 @@ section{padding:88px 0}
           <span class="hero-tag">Certificate included</span>
         </div>
         <div class="hero-cta">
-          <a class="btn btn-lime btn-lg" href="enroll.html">Apply for the Mini-MBA</a>
+          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
           <a class="btn btn-outline-white btn-lg" href="tracks.html">Prefer a focused 5-week track instead?</a>
         </div>
         <div class="hero-proof" style="margin-top:40px">
@@ -399,7 +400,7 @@ section{padding:88px 0}
           <div class="answer-card"><span class="ck">✓</span><p>Digital marketing skills — Instagram ads, Facebook ads, Google My Business, local SEO</p></div>
         </div>
         <div style="margin-top:28px">
-          <a class="btn btn-blue btn-lg" href="enroll.html">Apply now</a>
+          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
         </div>
       </div>
     </div>
@@ -607,7 +608,7 @@ section{padding:88px 0}
           </ul>
         </div>
         <div style="margin-top:28px">
-          <a class="btn btn-blue btn-lg" href="enroll.html">Apply now</a>
+          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
         </div>
       </div>
       <div class="deliverables reveal">
@@ -739,7 +740,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-blue btn-block btn-lg" href="enroll.html">Enroll &amp; pay in full</a>
+        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; pay in full</a>
       </div>
 
       <!-- PLAN 2: TWO PARTS -->
@@ -761,7 +762,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-lime btn-block btn-lg" href="enroll.html">Enroll &amp; split payment</a>
+        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; split payment</a>
       </div>
 
       <!-- PLAN 3: THREE PARTS -->
@@ -783,7 +784,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-outline-white btn-block btn-lg" style="background:var(--ink);color:var(--white);border-color:var(--ink)" href="enroll.html">Enroll &amp; pay in 3 parts</a>
+        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; pay in 3 parts</a>
       </div>
 
     </div>
@@ -812,18 +813,92 @@ section{padding:88px 0}
   </div>
 </div>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="container">
-    <span class="eyebrow on-dark" style="justify-content:center">Ready to start?</span>
-    <h2>Your skill built the foundation.<br>This program builds the business on top of it.</h2>
-    <p>Three months. Six business deliverables. One complete business plan and capstone. The next cohort starts soon.</p>
-    <div class="cta-row">
-      <a class="btn btn-lime btn-lg" href="enroll.html">Apply now</a>
-      <a class="btn btn-outline-white btn-lg" href="tracks.html">See the six tracks</a>
-      <a class="advisor-link" href="contact.html">Speak with an advisor first</a>
+<!-- MINI-MBA ENROLMENT FORM -->
+<section id="enroll" style="padding:72px 0;background:#fff">
+<div class="container">
+<div class="course-layout" style="padding-top:0">
+
+  <!-- FORM -->
+  <div class="course-body">
+    <span class="eyebrow">Enroll in the Mini-MBA</span>
+    <h2 style="margin:12px 0 8px">Secure your spot in the next cohort</h2>
+    <p style="margin-bottom:28px">Fill in your details and choose your payment plan. Our team will reach you within two hours with your cohort start date and onboarding details.</p>
+
+    <div class="form-card">
+      <div id="mbaSuccessBox" style="display:none;padding:24px 0;text-align:center">
+        <div style="width:56px;height:56px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;margin:0 auto 14px">&#10003;</div>
+        <h3 style="margin-bottom:8px">You are in!</h3>
+        <p style="color:var(--muted)">We have your payment. Our team will reach you within two hours with your cohort details.</p>
+        <p class="form-note" id="mbaPayRef" style="margin-top:8px"></p>
+      </div>
+      <form id="mbaEnrollForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="mba-name">Full name</label>
+            <input id="mba-name" name="fullname" type="text" placeholder="e.g. Amaka Okonkwo" required>
+          </div>
+          <div class="field">
+            <label for="mba-phone">Phone number</label>
+            <input id="mba-phone" name="phone" type="tel" placeholder="0801 234 5678" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="mba-email">Email address</label>
+          <input id="mba-email" name="email" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="mba-plan">Choose your payment plan</label>
+          <select id="mba-plan" name="plan" required>
+            <option value="">Select a payment plan...</option>
+            <option value="full" data-price="225000">Pay in full &mdash; &#8358;225,000</option>
+            <option value="half-half" data-price="112500">50% now + 50% after month 1 &mdash; &#8358;112,500 today</option>
+            <option value="three-part" data-price="112500">50% + 25% + 25% &mdash; &#8358;112,500 today</option>
+          </select>
+        </div>
+        <div id="mbaAmountDisplay" style="display:none;margin:4px 0 16px;padding:14px 18px;background:var(--soft);border-radius:10px;border:1px solid var(--line)">
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)" id="mbaPlanLabel"></span>
+          <div style="font-size:1.6rem;font-weight:900;color:var(--ink);margin-top:4px" id="mbaPriceAmt"></div>
+        </div>
+        <div class="field">
+          <label for="mba-ref">Referral code <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <input id="mba-ref" name="refcode" type="text" placeholder="Enter code if you have one">
+        </div>
+        <button type="submit" id="mbaPayBtn" class="btn btn-primary btn-block btn-lg" style="margin-top:8px" disabled>Select a payment plan above</button>
+        <p class="form-note center" style="margin-top:12px">Secure payment via Paystack &middot; Certificate included</p>
+      </form>
     </div>
   </div>
+
+  <!-- ASIDE -->
+  <aside class="course-aside">
+    <div class="aside-card">
+      <div class="ac-top">
+        <span class="ribbon">Mini-MBA investment</span>
+        <div class="price">&#8358;225,000</div>
+        <small>3 months &middot; certificate included</small>
+      </div>
+      <div class="ac-body">
+        <ul class="ticks">
+          <li>All 6 business modules</li>
+          <li>Monthly deliverables you keep</li>
+          <li>Capstone project &amp; defence</li>
+          <li>Graduation ceremony</li>
+          <li>Certificate of completion</li>
+          <li>Alumni network access</li>
+        </ul>
+        <div style="margin-top:16px;padding:14px;background:var(--soft);border-radius:8px">
+          <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:8px">Payment plans</p>
+          <p style="font-size:.82rem;margin:0 0 4px;color:var(--ink)"><b>Full:</b> &#8358;225,000</p>
+          <p style="font-size:.82rem;margin:0 0 4px;color:var(--ink)"><b>50%+50%:</b> &#8358;112,500 &times; 2</p>
+          <p style="font-size:.82rem;margin:0;color:var(--ink)"><b>3 parts:</b> &#8358;112,500 + &#8358;56,250 + &#8358;56,250</p>
+        </div>
+        <p class="form-note" style="margin-top:14px">Not ready for the full program? Try a <a href="tracks.html" style="color:var(--blue);font-weight:700">5-week track</a> instead.</p>
+      </div>
+    </div>
+  </aside>
+
+</div>
+</div>
 </section>
 
 <!-- FOOTER -->
@@ -833,7 +908,8 @@ section{padding:88px 0}
       <div>
         <a class="brand" href="index.html">
           <span class="brand-mark">V</span>
-          <span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span>
+          <img src="assets/img/vaa-logo.png" alt="VAA Global" style="height:32px;width:auto;filter:brightness(0) invert(1);display:block;margin-bottom:4px" onerror="this.style.display='none'">
+        <span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span>
         </a>
         <p>Stop running your trade like a hobby. The VAA Mini-MBA is a full 3-month business program with monthly deliverables, a capstone project and a certificate.</p>
       </div>
@@ -856,7 +932,7 @@ section{padding:88px 0}
       <div>
         <h5>Get in touch</h5>
         <a href="https://wa.me/2349025367017">+234 902 536 7017</a>
-        <a href="mailto:vocational@vaaglobal.tech">vocational@vaaglobal.tech</a>
+        <a href="mailto:support@vaaglobal.tech">support@vaaglobal.tech</a>
         <a href="contact.html">Speak with an advisor</a>
         <a href="assets/VAA-Mini-MBA-Brochure.pdf" download>Download brochure</a>
       </div>
@@ -869,7 +945,7 @@ section{padding:88px 0}
 </footer>
 
 <script>
-// Nav toggle
+// Mini-MBA form handled by main.js
 const toggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 if(toggle && navLinks){

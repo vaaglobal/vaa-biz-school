@@ -21,7 +21,7 @@ const PRICE = "&#8358;35,000";
 const PRICE_PLAIN = "₦35,000";
 const WA    = "2349025367017";
 const WAD   = "0902 536 7017";
-const EMAIL = "vocational@vaaglobal.tech";
+const EMAIL = "support@vaaglobal.tech";
 const OG    = SITE + "/assets/img/og-default.png";
 
 const esc     = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -87,9 +87,12 @@ function header(o){
   const links = NAV.map(([h,l])=>`<li><a href="${rel}${h}">${l}</a></li>`).join("");
   return `<header class="nav">
 <div class="container nav-inner">
-  <a class="brand" href="${rel}index.html">
-    <span class="brand-mark">V</span>
-    <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
+  <a class="brand" href="${rel}index.html" aria-label="${BRAND}">
+    <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <span class="brand-fallback" style="display:none">
+      <span class="brand-mark">V</span>
+      <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
+    </span>
   </a>
   <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav><ul class="nav-links">${links}</ul></nav>
@@ -107,6 +110,7 @@ function footer(o){
     <div class="f-brand">
       <a class="brand" href="${rel}index.html">
         <span class="brand-mark">V</span>
+        <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none'">
         <span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span>
       </a>
       <p style="margin-top:14px">You have the skill. We help you build the business and brand around it. Mini-MBA-style training for Nigerian artisans.</p>
