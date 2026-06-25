@@ -399,6 +399,6 @@ section{padding:84px 0}
 .footer .subscribe button{padding:8px 14px;background:var(--lime);color:#000;font-weight:700;font-size:.85rem;border-radius:8px;border:none;cursor:pointer}
 
 /* logo */
-.nav-logo{height:36px;width:auto;object-fit:contain;display:block}
-.footer-logo{height:32px;filter:brightness(0) invert(1);margin-bottom:4px}
+.nav-logo{height:40px;width:auto;object-fit:contain;display:block;max-width:160px}
+.footer-logo{height:36px;width:auto;filter:brightness(0) invert(1);display:block;margin-bottom:8px;max-width:140px}
 .brand-fallback{display:flex;align-items:center;gap:.6rem}
