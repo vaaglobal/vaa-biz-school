@@ -109,7 +109,7 @@
           if(lbl) lbl.textContent = planSel.options[planSel.selectedIndex].textContent.split("—")[0].trim();
           if(amt) amt.textContent = "\u20a6" + Number(price).toLocaleString();
           if(disp) disp.style.display = "block";
-          if(btn){ btn.disabled = false; btn.textContent = "Pay \u20a6" + Number(price).toLocaleString() + " & enroll"; }
+          if(btn){ btn.disabled = false; btn.textContent = "Submit application — \u20a6" + Number(price).toLocaleString(); }
         } else {
           if(disp) disp.style.display = "none";
           if(btn){ btn.disabled = true; btn.textContent = "Select a payment plan above"; }
@@ -224,7 +224,7 @@
         amt.textContent = "₦" + Number(price).toLocaleString();
         disp.style.display = "block";
         btn.disabled = false;
-        btn.textContent = "Pay ₦" + Number(price).toLocaleString() + " & enroll";
+        btn.textContent = "Submit application — ₦" + Number(price).toLocaleString();
         VAA.PRICE_KOBO = Number(price) * 100;
       } else {
         disp.style.display = "none";
@@ -262,10 +262,12 @@
     };
     var noKey = !VAA.PAYSTACK_PUBLIC_KEY || VAA.PAYSTACK_PUBLIC_KEY.indexOf("REPLACE_WITH")>-1;
     if(noKey || typeof PaystackPop === "undefined"){
-      // Demo / not-configured fallback: record the lead and confirm.
       postLead(Object.assign({type:"enroll", course:courseName, status:"pending_payment"}, data));
-      toast("Demo mode: add your Paystack key to take live payments.");
-      console.info("[VAA] Enrolment captured (demo):", data);
+      var box = document.getElementById("successBox");
+      var ref = document.getElementById("payRef");
+      if(ref) ref.textContent = "APP-" + Date.now();
+      if(box){ box.classList.remove("hide"); box.scrollIntoView({behavior:"smooth"}); }
+      document.getElementById("enrollForm").classList.add("hide");
       return;
     }
     var handler = PaystackPop.setup({
