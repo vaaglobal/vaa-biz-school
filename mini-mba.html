@@ -35,6 +35,7 @@
 
 /* ===================== RESET ===================== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;max-width:100%}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -310,11 +311,11 @@ section{padding:88px 0}
 <!-- NAV -->
 <header class="nav">
   <div class="container nav-inner">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <a class="brand" href="./" aria-label="VAA Global Business School">
       <img src="assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span style="display:none;align-items:center;gap:.5rem"><b style="color:#fff;font-size:.82rem">VAA GLOBAL</b><span style="color:var(--lime);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase">Business School</span></span>
     </a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav><ul class="nav-links">
       <li><a href="./">Home</a></li>
       <li><a href="tracks">Tracks</a></li>
@@ -322,10 +323,8 @@ section{padding:88px 0}
       <li><a href="pricing">Pricing</a></li>
       <li><a href="faq">FAQ</a></li>
       <li><a href="contact">Contact</a></li>
+      <li class="nav-enroll-item"><a class="btn btn-primary nav-enroll" href="#enroll">Enroll in Mini-MBA</a></li>
     </ul></nav>
-    <div class="nav-cta">
-      <a class="btn btn-outline-lime" href="#enroll">Enroll in Mini-MBA</a>
-    </div>
   </div>
 </header>
 
