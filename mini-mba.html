@@ -78,17 +78,7 @@ section{padding:88px 0}
 .nav-cta{display:flex;gap:10px;flex-shrink:0}
 
 /* ===================== BUTTONS ===================== */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;border-radius:8px;padding:13px 26px;cursor:pointer;border:2px solid transparent;transition:all .18s ease;white-space:nowrap}
-.btn-lime{background:var(--lime);color:var(--black);border-color:var(--lime)}
-.btn-lime:hover{background:var(--lime-dark);border-color:var(--lime-dark)}
-.btn-outline-lime{background:transparent;color:var(--lime);border-color:var(--lime)}
-.btn-outline-lime:hover{background:var(--lime);color:var(--black)}
-.btn-blue{background:var(--blue);color:var(--white);border-color:var(--blue)}
-.btn-blue:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
-.btn-outline-white{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
-.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
-.btn-lg{padding:16px 36px;font-size:.98rem}
-.btn-block{width:100%}
+/* buttons handled by assets/css/styles.css */
 
 /* ===================== HERO ===================== */
 .hero{background:var(--black);padding:96px 0 80px;overflow:hidden;position:relative}
@@ -362,9 +352,9 @@ section{padding:88px 0}
           <span class="hero-tag">Graduation ceremony</span>
           <span class="hero-tag">Certificate included</span>
         </div>
-        <div class="hero-cta">
-          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
-          <a class="btn btn-outline-white btn-lg" href="tracks">Prefer a focused 5-week track instead?</a>
+        <div class="hero-cta" style="flex-wrap:wrap;gap:12px">
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+          <a class="btn btn-ghost on-dark btn-lg" href="tracks">Prefer a focused 5-week track instead?</a>
         </div>
         <div class="hero-proof" style="margin-top:40px">
           <div class="stat"><b>6</b><span>Business modules</span></div>
@@ -417,7 +407,7 @@ section{padding:88px 0}
           <div class="answer-card"><span class="ck">✓</span><p>Digital marketing skills — Instagram ads, Facebook ads, Google My Business, local SEO</p></div>
         </div>
         <div style="margin-top:28px">
-          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
         </div>
       </div>
     </div>
@@ -625,7 +615,7 @@ section{padding:88px 0}
           </ul>
         </div>
         <div style="margin-top:28px">
-          <a class="btn btn-lime btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
         </div>
       </div>
       <div class="deliverables reveal">
@@ -757,7 +747,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; pay in full</a>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; pay in full</a>
       </div>
 
       <!-- PLAN 2: TWO PARTS -->
@@ -779,7 +769,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; split payment</a>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; split payment</a>
       </div>
 
       <!-- PLAN 3: THREE PARTS -->
@@ -801,7 +791,7 @@ section{padding:88px 0}
           <li>Certificate of completion</li>
           <li>Alumni network access</li>
         </ul>
-        <a class="btn btn-lime btn-block btn-lg" href="#enroll">Enroll &amp; pay in 3 parts</a>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; pay in 3 parts</a>
       </div>
 
     </div>
@@ -812,7 +802,7 @@ section{padding:88px 0}
         <h4 style="color:#fff;margin-bottom:4px">Group or corporate enrolment?</h4>
         <p style="margin:0;font-size:.88rem;color:#9aa2ac">Enrol a group of artisans from your community, association or organisation and get custom pricing.</p>
       </div>
-      <a class="btn btn-lime" href="contact">Talk to our team</a>
+      <a class="btn btn-primary" href="contact">Talk to our team</a>
     </div>
   </div>
 </section>
@@ -825,7 +815,7 @@ section{padding:88px 0}
         <h3 style="color:#fff;margin-bottom:6px">Download the program brochure</h3>
         <p style="color:rgba(255,255,255,.7);margin:0">Full curriculum, deliverables, assessment structure and pricing — as a PDF you can read offline or share with someone.</p>
       </div>
-      <a class="btn btn-lime btn-lg" href="assets/VAA-Mini-MBA-Brochure.pdf" download>Download brochure (PDF)</a>
+      <a class="btn btn-primary btn-lg" href="assets/VAA-Mini-MBA-Brochure.pdf" download>Download brochure (PDF)</a>
     </div>
   </div>
 </div>
