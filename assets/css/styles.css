@@ -83,7 +83,7 @@ p{margin:0 0 1rem}
 /* ===========================================================
    NAVBAR
    =========================================================== */
-.nav{position:sticky;top:0;z-index:200;background:var(--black);
+.nav{position:sticky;top:0;z-index:240;background:var(--black);
   border-bottom:1px solid rgba(255,255,255,.08)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:75px;gap:16px}
 .brand{display:flex;align-items:center;gap:.6rem;font-weight:900;letter-spacing:-.02em;flex-shrink:0}
@@ -832,4 +832,11 @@ section.dark-bg .card p{color:#b9c0ca}
   .hero-cta-card {
     height: auto; /* no need to stretch in single-col layout */
   }
+}
+
+/* FIX 5: mobile nav drawer links — force light text color so they
+   are never overridden/darkened by a conflicting rule elsewhere. */
+@media(max-width:540px){
+  .nav-links a{ color:#e6e6e6 !important; }
+  .nav-links a:hover, .nav-links a:active{ color:var(--lime) !important; }
 }
