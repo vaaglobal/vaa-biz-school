@@ -24,11 +24,11 @@ const WAD   = "0902 536 7017";
 const EMAIL = "support@vaaglobal.tech";
 const OG    = SITE + "/assets/img/og-default.png";
 
-const esc     = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const jsonld  = o => `<script type="application/ld+json">${JSON.stringify(o,null,0)}</script>`;
+const esc    = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const jsonld = o => `<script type="application/ld+json">${JSON.stringify(o,null,0)}</script>`;
 
-const NAV = [["index.html","Home"],["tracks.html","Tracks"],["mini-mba.html","Mini-MBA"],
-             ["pricing.html","Pricing"],["faq.html","FAQ"],["contact.html","Contact"]];
+const NAV = [["./","Home"],["tracks","Tracks"],["mini-mba","Mini-MBA"],
+             ["pricing","Pricing"],["faq","FAQ"],["contact","Contact"]];
 
 const ORG_LD = {
   "@context":"https://schema.org","@type":"EducationalOrganization",
@@ -87,18 +87,29 @@ function header(o){
   const links = NAV.map(([h,l])=>`<li><a href="${rel}${h}">${l}</a></li>`).join("");
   return `<header class="nav">
 <div class="container nav-inner">
-  <a class="brand" href="${rel}index.html" aria-label="${BRAND}">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="brand" href="${rel}./" aria-label="${BRAND}">
     <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="brand-fallback" style="display:none">
       <span class="brand-mark">V</span>
       <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
     </span>
   </a>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  <nav><ul class="nav-links">${links}</ul></nav>
-  <div class="nav-cta"><a class="btn btn-primary nav-enroll" href="${rel}enroll.html">Enroll now</a></div>
+  <nav><ul class="nav-links">
+    <li class="nav-drawer-header">
+      <a class="brand" href="${rel}./" style="gap:.5rem">
+        <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" style="height:32px" onerror="this.style.display='none'">
+        <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
+      </a>
+      <button class="nav-close" aria-label="Close menu">&times;</button>
+    </li>
+    ${links}
+    <li class="nav-enroll-item"><a class="btn btn-primary nav-enroll" href="${rel}enroll">Enroll now</a></li>
+  </ul></nav>
+  <div class="nav-cta"><a class="btn btn-primary nav-enroll" href="${rel}enroll">Enroll now</a></div>
 </div>
-</header>`;
+</header>
+<div class="nav-backdrop"></div>`;
 }
 
 function footer(o){
@@ -108,10 +119,9 @@ function footer(o){
 <div class="container">
   <div class="footer-grid">
     <div class="f-brand">
-      <a class="brand" href="${rel}index.html">
-        <span class="brand-mark">V</span>
-        <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none'">
-        <span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span>
+      <a class="brand" href="${rel}./">
+        <img src="${rel}assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="brand-fallback" style="display:none"><span class="brand-mark">V</span><span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span></span>
       </a>
       <p style="margin-top:14px">You have the skill. We help you build the business and brand around it. Mini-MBA-style training for Nigerian artisans.</p>
       <div class="socials">
@@ -122,16 +132,15 @@ function footer(o){
     </div>
     <div>
       <h5>Tracks</h5>
-      ${TRACKS.map(t=>`<a href="${rel}courses/${t.slug}.html">${esc(t.name)}</a>`).join("")}
+      ${TRACKS.map(t=>`<a href="${rel}courses/${t.slug}">${esc(t.name)}</a>`).join("")}
     </div>
     <div>
       <h5>School</h5>
-      <a href="${rel}about.html">About us</a>
-      <a href="${rel}pricing.html">Pricing</a>
-      <a href="${rel}faq.html">FAQ</a>
-      <a href="${rel}contact.html">Contact</a>
-      <a href="${rel}blog.html">Resources</a>
-      <a href="${rel}referral.html">Referral program</a>
+      <a href="${rel}about">About us</a>
+      <a href="${rel}pricing">Pricing</a>
+      <a href="${rel}faq">FAQ</a>
+      <a href="${rel}contact">Contact</a>
+      <a href="${rel}referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
