@@ -37,20 +37,31 @@
 </head><body>
 <header class="nav">
 <div class="container nav-inner">
-  <a class="brand" href="../index.html" aria-label="VAA Global Business School for Artisans">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="brand" href=".././" aria-label="VAA Global Business School for Artisans">
     <img src="../assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="brand-fallback" style="display:none">
       <span class="brand-mark">V</span>
       <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
     </span>
   </a>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  <nav><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../tracks.html">Tracks</a></li><li><a href="../mini-mba.html">Mini-MBA</a></li><li><a href="../pricing.html">Pricing</a></li><li><a href="../faq.html">FAQ</a></li><li><a href="../contact.html">Contact</a></li></ul></nav>
-  <div class="nav-cta"><a class="btn btn-primary nav-enroll" href="../enroll.html">Enroll now</a></div>
+  <nav><ul class="nav-links">
+    <li class="nav-drawer-header">
+      <a class="brand" href=".././" style="gap:.5rem">
+        <img src="../assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" style="height:32px" onerror="this.style.display='none'">
+        <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
+      </a>
+      <button class="nav-close" aria-label="Close menu">&times;</button>
+    </li>
+    <li><a href=".././">Home</a></li><li><a href="../tracks">Tracks</a></li><li><a href="../mini-mba">Mini-MBA</a></li><li><a href="../pricing">Pricing</a></li><li><a href="../faq">FAQ</a></li><li><a href="../contact">Contact</a></li>
+    <li class="nav-enroll-item"><a class="btn btn-primary nav-enroll" href="../enroll">Enroll now</a></li>
+  </ul></nav>
+  <div class="nav-cta"><a class="btn btn-primary nav-enroll" href="../enroll">Enroll now</a></div>
 </div>
 </header>
+<div class="nav-backdrop"></div>
 
-<div class="container"><div class="crumb"><a href="../index.html">Home</a> / <a href="../tracks.html">Tracks</a> / <span>Food &amp; Hospitality Business</span></div></div>
+<div class="container"><div class="crumb"><a href="../">Home</a> / <a href="../tracks">Tracks</a> / <span>Food &amp; Hospitality Business</span></div></div>
 <section class="course-hero" style="padding-top:10px">
 <div class="container">
   <div class="inner">
@@ -65,7 +76,7 @@
     </div>
     <div class="hero-cta" style="margin-top:26px">
       <a class="btn btn-primary btn-lg" href="../enroll.html?course=food-hospitality-business">Start building your business</a>
-      <a class="btn btn-ghost on-dark btn-lg" href="../contact.html">I have a question first</a>
+      <a class="btn btn-ghost on-dark btn-lg" href="../contact">I have a question first</a>
     </div>
   </div>
 </div>
@@ -153,32 +164,31 @@
 <div class="container">
   <div class="section-head"><span class="eyebrow">Other tracks</span><h2>Explore related tracks</h2></div>
   <div class="grid grid-3">
-<a class="card reveal" href="fashion-beauty-business.html">
+<a class="card reveal" href="fashion-beauty-business">
   <span class="track-icon">✂</span>
   <h3>Fashion &amp; Beauty Business</h3>
   <p>For tailors, makeup artists, hair stylists, nail technicians and beauty therapists who want to build a brand and earn what they deserve.</p>
 </a>
-<a class="card reveal" href="home-trades-business.html">
+<a class="card reveal" href="home-trades-business">
   <span class="track-icon">🔧</span>
   <h3>Home Trades Business</h3>
   <p>For electricians, plumbers, carpenters, painters, tilers and POP artisans who are skilled but struggling to build a steady, well-paying client base.</p>
 </a>
-<a class="card reveal" href="automotive-business.html">
+<a class="card reveal" href="automotive-business">
   <span class="track-icon">🚗</span>
   <h3>Automotive &amp; Tech Repairs Business</h3>
   <p>For mechanics, auto electricians, phone and laptop repairers, panel beaters and detailers who want to stop trading time for too little money.</p>
 </a></div>
-  <div style="margin-top:30px"><a class="btn btn-blue" href="../tracks.html">See all six tracks &rarr;</a></div>
+  <div style="margin-top:30px"><a class="btn btn-blue" href="../tracks">See all six tracks &rarr;</a></div>
 </div>
 </section>
 <footer class="footer">
 <div class="container">
   <div class="footer-grid">
     <div class="f-brand">
-      <a class="brand" href="../index.html">
-        <span class="brand-mark">V</span>
-        <img src="../assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none'">
-        <span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span>
+      <a class="brand" href=".././">
+        <img src="../assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="brand-fallback" style="display:none"><span class="brand-mark">V</span><span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span></span>
       </a>
       <p style="margin-top:14px">You have the skill. We help you build the business and brand around it. Mini-MBA-style training for Nigerian artisans.</p>
       <div class="socials">
@@ -189,16 +199,15 @@
     </div>
     <div>
       <h5>Tracks</h5>
-      <a href="../courses/fashion-beauty-business.html">Fashion &amp; Beauty Business</a><a href="../courses/food-hospitality-business.html">Food &amp; Hospitality Business</a><a href="../courses/home-trades-business.html">Home Trades Business</a><a href="../courses/automotive-business.html">Automotive &amp; Tech Repairs Business</a><a href="../courses/agriculture-agro-business.html">Agriculture &amp; Agro-Processing Business</a><a href="../courses/creative-services-business.html">Creative Services Business</a>
+      <a href="../courses/fashion-beauty-business">Fashion &amp; Beauty Business</a><a href="../courses/food-hospitality-business">Food &amp; Hospitality Business</a><a href="../courses/home-trades-business">Home Trades Business</a><a href="../courses/automotive-business">Automotive &amp; Tech Repairs Business</a><a href="../courses/agriculture-agro-business">Agriculture &amp; Agro-Processing Business</a><a href="../courses/creative-services-business">Creative Services Business</a>
     </div>
     <div>
       <h5>School</h5>
-      <a href="../about.html">About us</a>
-      <a href="../pricing.html">Pricing</a>
-      <a href="../faq.html">FAQ</a>
-      <a href="../contact.html">Contact</a>
-      <a href="../blog.html">Resources</a>
-      <a href="../referral.html">Referral program</a>
+      <a href="../about">About us</a>
+      <a href="../pricing">Pricing</a>
+      <a href="../faq">FAQ</a>
+      <a href="../contact">Contact</a>
+            <a href="../referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
