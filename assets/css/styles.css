@@ -21,7 +21,7 @@
   --soft:#f5f7fa;
   --white:#ffffff;
 
-  --maxw:1180px;
+  --muted:#7b8088;
   --radius:14px;
   --radius-lg:22px;
   --shadow:0 18px 50px -28px rgba(1,51,86,.45);
@@ -421,7 +421,7 @@ section{padding:84px 0}
 .nav-logo{height:50px;width:auto;display:block}
 .footer-logo{height:50px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:12px}
 @media(max-width:860px){.nav-logo{height:42px}.footer-logo{height:42px}}
-.brand-fallback{display:flex;align-items:center;gap:.6rem}
+.brand-fallback{display:none;align-items:center;gap:.6rem}
 
 
 /* =====================================================================
@@ -437,7 +437,6 @@ img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 
  */
-TYPOGRAPHY
 /* LAYOUT */
 
 .container{max-width:1160px;margin:0 auto;padding:0 28px}
@@ -451,8 +450,6 @@ section{padding:88px 0}
 
 /* 
 
- */
-BUTTONS
 /* HERO */
 
 .hero{background:var(--black);padding:96px 0 80px;overflow:hidden;position:relative}
@@ -495,7 +492,6 @@ BUTTONS
 @media(max-width:540px){.glance-inner{grid-template-columns:1fr 1fr}}
 
  */
-PROBLEM SECTION
 /* FOR WHO */
 
 .forwho{background:var(--soft)}
@@ -530,7 +526,6 @@ PROBLEM SECTION
 @media(max-width:700px){.curr-month{grid-template-columns:1fr}.curr-spine{display:none}.curr-body{padding:0 0 36px 0}}
 
  */
-SPECIALISATION
 /* CAPSTONE */
 
 .capstone{background:var(--soft);padding:88px 0}
@@ -563,7 +558,6 @@ SPECIALISATION
 @media(max-width:480px){.walkaway-grid{grid-template-columns:1fr}}
 
  */
-CERTIFICATE
 /* ALUMNI */
 
 .alumni{background:var(--black);padding:88px 0}
@@ -609,36 +603,8 @@ CERTIFICATE
 .price-contact{font-size:.82rem;color:var(--lime);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:860px){.pricing-grid{grid-template-columns:1fr}}
 
-/* =====================================================================
-   FINAL CTA (MBA PAGE)
-   ===================================================================== */
-.final-cta{background:var(--black);padding:96px 0;text-align:center}
-.final-cta h2{color:var(--white);font-size:clamp(2rem,4vw,3.4rem);max-width:700px;margin:16px auto 24px}
-.final-cta p{color:#9aa2ac;max-width:520px;margin:0 auto 40px;font-size:1.05rem}
-.final-cta .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
-.final-cta .advisor-link{color:#9aa2ac;font-size:.88rem;font-weight:600;text-decoration:underline;text-underline-offset:3px}
-
-/* =====================================================================
-   REVEAL ANIMATION
-   ===================================================================== */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
-
-/* =====================================================================
-   MOBILE SAFETY NET (all pages)
-   ===================================================================== */
-@media(max-width:480px){
-  h1{font-size:clamp(1.6rem,7vw,2.4rem);word-break:break-word;overflow-wrap:break-word}
-  h2{font-size:clamp(1.3rem,5.5vw,2rem);word-break:break-word}
-  .container{padding:0 16px}
-  .hero-cta{flex-wrap:wrap;gap:10px}
-  .hero-cta .btn{min-width:0;flex:1 1 100%}
-}
-
-/* =====================================================================
-   MINI-MBA PAGE — MOBILE FIXES (scoped to MBA-specific classes only)
-   ===================================================================== */
+ */
+/* MOBILE FIXES */
 @media(max-width:640px){
   .grid-2,.spec-grid,.capstone-inner,.cert-inner,.alumni-inner,.forwho-inner,.problem-grid{
     grid-template-columns:1fr !important;
@@ -647,14 +613,363 @@ CERTIFICATE
   .curr-spine{display:none}
   .curr-body{padding:0 0 32px}
   .pricing-grid{grid-template-columns:1fr !important}
-  .hero-inner{padding:40px 0 48px}
+  .hero-inner{padding:40px 0 48px;max-width:100% !important}
+  h1{font-size:clamp(1.35rem,5vw,1.9rem) !important;word-break:break-word;overflow-wrap:break-word}
+  h2{font-size:clamp(1.3rem,5vw,1.8rem) !important;word-break:break-word}
+  h3{font-size:1.1rem !important}
+  p{font-size:.9rem}
   .stat-grid{grid-template-columns:1fr 1fr}
   .glance-inner{grid-template-columns:1fr 1fr}
   .walkaway-grid{grid-template-columns:1fr}
   .cert-grade-grid{grid-template-columns:1fr 1fr}
+  section{padding:48px 0}
+  .container{padding:0 18px !important;max-width:100% !important}
+  /* hero CTA stack on mobile */
   .hero-cta{flex-direction:column !important;align-items:stretch !important;gap:10px !important}
-  .hero-cta .btn{width:100% !important;text-align:center !important;white-space:normal !important}
+  .hero-cta .btn{width:100% !important;text-align:center !important;box-sizing:border-box !important;white-space:normal !important}
   .hero-tags{gap:6px;flex-wrap:wrap}
   .hero-tag{font-size:.7rem;padding:4px 10px;white-space:normal}
+  /* hero proof stats */
   .hero-proof{gap:20px;flex-wrap:wrap}
+  /* prevent any element going wider than screen */
+  *{max-width:100%;box-sizing:border-box}
+  img{max-width:100%}
+}
+
+/* ===========================================================
+   FIXES & MISSING VARIABLES
+   =========================================================== */
+
+/* --muted was referenced but never defined */
+:root {
+  --muted: #7b8088;
+}
+
+/* ===========================================================
+   NAV — mobile triple-logo fix
+   The brand in nav-drawer-header duplicates the main brand.
+   On mobile, hide the main .brand in the header bar entirely
+   (the drawer header has its own brand). Also ensure fallback
+   never shows alongside the real logo simultaneously.
+   =========================================================== */
+@media (max-width: 860px) {
+  /* Only ONE logo shows in the header bar on mobile */
+  .nav-inner > .brand .brand-fallback { display: none !important; }
+  /* Drawer header brand text is always white */
+  .nav-drawer-header .brand-txt b { color: #fff; }
+}
+
+/* ===========================================================
+   BUTTON VARIANT — outline on dark (used in index.html hero)
+   =========================================================== */
+.btn-outline-on-dark {
+  background: transparent;
+  border: 2px solid rgba(207,249,29,.45);
+  color: #fff;
+}
+.btn-outline-on-dark:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+  transform: translateY(-2px);
+}
+
+/* ===========================================================
+   PROBLEM SECTION (mini-mba)
+   =========================================================== */
+.problem { background: var(--white); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
+
+.problem-cards { display: grid; gap: 12px; }
+.problem-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #fff7f7;
+  border: 1px solid #ffe0e0;
+  border-radius: 10px;
+}
+.problem-card .px {
+  color: #e00;
+  font-size: 1rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.problem-card p { margin: 0; color: var(--gray); font-size: .92rem; }
+
+.answer-cards { display: grid; gap: 10px; margin-top: 4px; }
+.answer-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #f0fff0;
+  border: 1px solid #c3e6c3;
+  border-radius: 10px;
+}
+.answer-card .ck {
+  color: #1a7a1a;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.answer-card p { margin: 0; color: var(--ink); font-size: .92rem; }
+
+/* ===========================================================
+   SPEC CARDS (mini-mba specialisation section)
+   =========================================================== */
+.specs { }
+.specs-head { margin-bottom: 28px; }
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 860px) { .spec-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .spec-grid { grid-template-columns: 1fr; } }
+
+.spec-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: transform .2s, box-shadow .2s;
+}
+.spec-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.spec-card h4 { font-size: 1rem; margin-bottom: .4rem; }
+.spec-card p { font-size: .88rem; color: var(--gray); margin: 0; }
+.spec-tag {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--blue);
+  background: rgba(1,96,165,.08);
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+
+/* ===========================================================
+   CERTIFICATE SECTION (mini-mba)
+   =========================================================== */
+.certificate { background: var(--soft); }
+.cert-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 860px) { .cert-inner { grid-template-columns: 1fr; } }
+
+.cert-name {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.cert-sub { font-size: .9rem; color: var(--gray); margin-bottom: 24px; }
+
+.cert-grade { margin-top: 20px; }
+.grade { display: inline-flex; align-items: center; gap: 8px; }
+
+.cert-grade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.cert-badge {
+  background: var(--black);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  text-align: center;
+}
+.cert-badge-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--lime);
+  line-height: 1;
+}
+.cert-badge-sub {
+  font-size: .72rem;
+  color: #9aa2ac;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* cert-table used in certification breakdown */
+.cert-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+.cert-table th, .cert-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  font-size: .88rem;
+  text-align: left;
+}
+.cert-table th { background: var(--soft); font-weight: 700; }
+
+/* range (grading range display) */
+.range {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(1,96,165,.08);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+/* ===========================================================
+   GLANCE BAR (mini-mba at-a-glance strip)
+   =========================================================== */
+.glance {
+  background: var(--soft);
+  border-top: 3px solid var(--lime);
+  border-bottom: 1px solid var(--line);
+  padding: 0;
+}
+.glance-inner {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.glance-item {
+  padding: 24px 20px;
+  border-right: 1px solid var(--line);
+}
+.glance-item:last-child { border-right: none; }
+.glance-item .gi-label {
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.glance-item .gi-val {
+  font-size: .98rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+@media (max-width: 960px) {
+  .glance-inner { grid-template-columns: repeat(3, 1fr); }
+  .glance-item { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 540px) {
+  .glance-inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===========================================================
+   DESKTOP LAYOUT FIXES (homepage hero CTA buttons)
+   =========================================================== */
+
+/* Ensure hero section on index.html doesn't wrap badly on desktop */
+.hero-inner {
+  display: grid;
+  /* index.html hero is single-column */
+}
+
+/* ===========================================================
+   PRICECARD — ensure max-width doesn't crush them inside grid
+   =========================================================== */
+.grid-2 .pricecard { max-width: 100%; }
+
+/* ===========================================================
+   FOOTER — subscribe form (footer email input + button)
+   =========================================================== */
+footer form[data-form="subscribe"] {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+footer form[data-form="subscribe"] input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  font-size: .85rem;
+}
+footer form[data-form="subscribe"] button {
+  padding: 8px 14px;
+  background: var(--lime);
+  color: #000;
+  font-weight: 700;
+  font-size: .85rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ===========================================================
+   DARK CARD TEXT FIX (cards on dark backgrounds)
+   Cards inside .dark-bg sections get dark bg but text stays dark
+   unless explicitly set. Fix that.
+   =========================================================== */
+.dark-bg .card { background: rgba(255,255,255,.05); border-color: #222; }
+.dark-bg .card h3 { color: #fff; }
+.dark-bg .card p { color: #b9c0ca; }
+
+/* stats-band inside white section — ensure text readable */
+.stats-band .s b { color: var(--blue); }
+
+/* ===========================================================
+   ABOUT PAGE — dark section card duplication fix
+   =========================================================== */
+.dark-bg.section .card h3,
+section.dark-bg .card h3 { color: #fff; }
+section.dark-bg .card { background: #111; border-color: #222; }
+section.dark-bg .card p { color: #b9c0ca; }
+
+/* ===========================================================
+   MOBILE RESPONSIVE FINAL PASS
+   =========================================================== */
+@media (max-width: 640px) {
+  .problem-grid { grid-template-columns: 1fr !important; }
+  .spec-grid { grid-template-columns: 1fr !important; }
+  .cert-inner { grid-template-columns: 1fr !important; }
+  .cert-grade-grid { grid-template-columns: 1fr 1fr; }
+  /* hero dual CTA buttons on index.html */
+  .hero-inner > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* pricing grid in mini-mba */
+  .pricing-grid[style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ===========================================================
+   MOBILE NAV — DEFINITIVE LOGO FIX
+   On mobile: hide the main header brand (the drawer has its own).
+   Only the hamburger toggle + Enroll CTA-in-drawer remain visible.
+   =========================================================== */
+@media (max-width: 860px) {
+  /* Hide main brand in header bar — drawer shows its own */
+  .nav-inner > .brand { display: none; }
+  /* But show it when JS hasn't run yet (no-js fallback): 
+     if .nav-links is not .open, still show the brand */
+  .nav-inner { justify-content: space-between; }
+}
+/* Actually we want brand visible in header on mobile for non-open state.
+   The real fix: only ONE logo shows, always. 
+   Revert the hide above — instead just hide the fallback unless img errors */
+@media (max-width: 860px) {
+  .nav-inner > .brand { display: flex; } /* restore */
+  /* Ensure the brand-fallback span only appears when img fails (onerror sets it) */
+  /* The onerror already handles this — the issue is CSS overriding display:none */
+  .nav-inner > .brand .brand-fallback[style*="display:none"] { display: none !important; }
+  /* Drawer header logo: always show, hide its brand-fallback unless img errors */
+  .nav-drawer-header .brand .brand-fallback[style*="display:none"] { display: none !important; }
 }
