@@ -35,8 +35,8 @@
 </head><body>
 <header class="nav">
 <div class="container nav-inner">
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  <a class="brand" href="index.html" aria-label="VAA Global Business School for Artisans">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="brand" href="./" aria-label="VAA Global Business School for Artisans">
     <img src="assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span class="brand-fallback" style="display:none">
       <span class="brand-mark">V</span>
@@ -44,11 +44,20 @@
     </span>
   </a>
   <nav><ul class="nav-links">
+    <li class="nav-drawer-header">
+      <a class="brand" href="./" style="gap:.5rem">
+        <img src="assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo" style="height:32px" onerror="this.style.display='none'">
+        <span class="brand-txt"><b>VAA GLOBAL</b><span>Business School</span></span>
+      </a>
+      <button class="nav-close" aria-label="Close menu">&times;</button>
+    </li>
     <li><a href="./">Home</a></li><li><a href="tracks">Tracks</a></li><li><a href="mini-mba">Mini-MBA</a></li><li><a href="pricing">Pricing</a></li><li><a href="faq">FAQ</a></li><li><a href="contact">Contact</a></li>
     <li class="nav-enroll-item"><a class="btn btn-primary nav-enroll" href="enroll">Enroll now</a></li>
   </ul></nav>
+  <div class="nav-cta"><a class="btn btn-primary nav-enroll" href="enroll">Enroll now</a></div>
 </div>
 </header>
+<div class="nav-backdrop"></div>
 
 <div class="container"><div class="crumb"><a href="./">Home</a> / <span>Enroll</span></div></div>
 <section style="padding-top:24px">
@@ -125,7 +134,7 @@
 <div class="container">
   <div class="footer-grid">
     <div class="f-brand">
-      <a class="brand" href="index.html">
+      <a class="brand" href="./">
         <img src="assets/img/vaa-logo.png" alt="VAA Global" class="nav-logo footer-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <span class="brand-fallback" style="display:none"><span class="brand-mark">V</span><span class="brand-txt"><b style="color:#fff">VAA GLOBAL</b><span>Business School</span></span></span>
       </a>
@@ -138,15 +147,15 @@
     </div>
     <div>
       <h5>Tracks</h5>
-      <a href="courses/fashion-beauty-business.html">Fashion &amp; Beauty Business</a><a href="courses/food-hospitality-business.html">Food &amp; Hospitality Business</a><a href="courses/home-trades-business.html">Home Trades Business</a><a href="courses/automotive-business.html">Automotive &amp; Tech Repairs Business</a><a href="courses/agriculture-agro-business.html">Agriculture &amp; Agro-Processing Business</a><a href="courses/creative-services-business.html">Creative Services Business</a>
+      <a href="courses/fashion-beauty-business">Fashion &amp; Beauty Business</a><a href="courses/food-hospitality-business">Food &amp; Hospitality Business</a><a href="courses/home-trades-business">Home Trades Business</a><a href="courses/automotive-business">Automotive &amp; Tech Repairs Business</a><a href="courses/agriculture-agro-business">Agriculture &amp; Agro-Processing Business</a><a href="courses/creative-services-business">Creative Services Business</a>
     </div>
     <div>
       <h5>School</h5>
-      <a href="about.html">About us</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Contact</a>
-            <a href="referral.html">Referral program</a>
+      <a href="about">About us</a>
+      <a href="pricing">Pricing</a>
+      <a href="faq">FAQ</a>
+      <a href="contact">Contact</a>
+            <a href="referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
