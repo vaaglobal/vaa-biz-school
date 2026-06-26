@@ -100,26 +100,50 @@ p{margin:0 0 1rem}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px;flex-shrink:0}
 .nav-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px;transition:.25s}
 @media(max-width:860px){
-  .nav-inner{height:64px;flex-wrap:nowrap}
+  /* nav bar */
+  .nav-inner{height:64px;flex-wrap:nowrap;justify-content:space-between}
+  .nav-cta{display:none} /* remove desktop enroll button on mobile */
+
+  /* hamburger - left */
+  .nav-toggle{display:block;order:-1}
+
+  /* full screen overlay when open */
   .nav-links{
     display:none;
-    position:absolute;
-    top:64px;left:0;right:0;
+    position:fixed;
+    inset:0;
     background:var(--black);
     flex-direction:column;
     align-items:stretch;
-    padding:8px 0 24px;
-    border-bottom:1px solid rgba(255,255,255,.1);
-    z-index:999;
-    box-shadow:0 8px 24px rgba(0,0,0,.5);
+    justify-content:flex-start;
+    padding:80px 0 40px;
+    z-index:998;
+    overflow-y:auto;
   }
   .nav-links.open{display:flex}
-  .nav-links li{width:100%;border-bottom:1px solid rgba(255,255,255,.06)}
+
+  /* individual links */
+  .nav-links li{border-bottom:1px solid rgba(255,255,255,.08)}
   .nav-links li:last-child{border-bottom:none}
-  .nav-links a{display:block;padding:16px 24px;font-size:1rem;font-weight:600;color:#fff}
-  .nav-links a:hover{color:var(--lime);background:rgba(255,255,255,.04)}
-  .nav-toggle{display:block}
-  .nav-cta .btn{padding:10px 18px;font-size:.82rem}
+  .nav-links a{display:block;padding:18px 28px;font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:.01em}
+  .nav-links a:active{color:var(--lime)}
+
+  /* enroll button inside menu */
+  .nav-enroll-item{margin:24px 28px 0;border:none !important}
+  .nav-enroll-item .btn{display:block;width:100%;text-align:center;padding:16px;font-size:1rem}
+
+  /* close button inside overlay */
+  .nav-links::before{
+    content:"✕";
+    position:fixed;
+    top:18px;left:20px;
+    color:#fff;font-size:1.2rem;
+    cursor:pointer;
+    z-index:999;
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+  }
+
   .nav-logo{height:38px}
 }
 
