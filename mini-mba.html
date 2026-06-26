@@ -66,9 +66,7 @@ section{padding:88px 0}
 /* ===================== NAV ===================== */
 .nav{position:sticky;top:0;z-index:100;background:var(--black);border-bottom:1px solid #1a1a1a}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
-.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.nav-toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
-@media(max-width:860px){.nav-toggle{display:flex}.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--black);border-bottom:1px solid #1a1a1a;flex-direction:column;padding:16px 28px 24px}.nav-links.open{display:flex}.nav-links li{padding:10px 0;border-bottom:1px solid #1a1a1a}.nav-links a{font-size:1rem}}
+/* nav handled by assets/css/styles.css */
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{width:34px;height:34px;background:var(--lime);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;color:var(--black);flex-shrink:0}
 .brand-txt{display:flex;flex-direction:column;line-height:1.1}
@@ -304,6 +302,26 @@ section{padding:88px 0}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+/* ===== MOBILE FIXES ===== */
+@media(max-width:640px){
+  .grid-2,.spec-grid,.capstone-inner,.cert-inner,.alumni-inner,.forwho-inner,.problem-grid{
+    grid-template-columns:1fr !important;
+  }
+  .curr-month{grid-template-columns:1fr}
+  .curr-spine{display:none}
+  .curr-body{padding:0 0 32px}
+  .pricing-grid{grid-template-columns:1fr !important}
+  .hero-inner{padding:40px 0 48px}
+  h1{font-size:clamp(1.8rem,7vw,2.8rem)}
+  h2{font-size:clamp(1.5rem,5.5vw,2.2rem)}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .glance-inner{grid-template-columns:1fr 1fr}
+  .walkaway-grid{grid-template-columns:1fr}
+  .cert-grade-grid{grid-template-columns:1fr 1fr}
+  section{padding:56px 0}
+  .container{padding:0 16px}
+}
 </style>
 </head>
 <body>
@@ -943,20 +961,14 @@ section{padding:88px 0}
 </footer>
 
 <script>
-// Mini-MBA form handled by main.js
-const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-if(toggle && navLinks){
-  toggle.addEventListener('click',()=>{
-    const open = navLinks.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-}
 // Reveal on scroll
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
 },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="assets/js/courses-data.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
