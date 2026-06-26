@@ -7,8 +7,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap');
 
 :root{
-  --lime:#CFF91D;          /* bright accent (on dark / black text on it) */
-  --lime-deep:#A6C800;     /* deeper lime usable on white */
+  --lime:#CFF91D;
+  --lime-deep:#A6C800;
   --lime-darker:#7E9A00;
   --blue:#0160A5;
   --blue-deep:#014A7E;
@@ -20,13 +20,12 @@
   --line:#e7e9ee;
   --soft:#f5f7fa;
   --white:#ffffff;
-
   --muted:#7b8088;
+  --maxw:1180px;
   --radius:14px;
   --radius-lg:22px;
   --shadow:0 18px 50px -28px rgba(1,51,86,.45);
   --shadow-sm:0 8px 24px -16px rgba(0,0,0,.4);
-
   --font:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 }
 
@@ -99,33 +98,79 @@ p{margin:0 0 1rem}
 .nav-cta{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px;flex-shrink:0;position:relative;z-index:250}
 .nav-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px;transition:.25s}
-.nav-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:210;cursor:pointer}
-.nav-backdrop.open{display:block}
+
+/* ── BACKDROP: pointer-events off by default, only on when open ── */
+.nav-backdrop{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:210;
+  cursor:pointer;
+  pointer-events:none; /* FIX: don't intercept touches when hidden */
+}
+.nav-backdrop.open{
+  display:block;
+  pointer-events:auto; /* FIX: only capture taps when actually open */
+}
+
 .nav-drawer-header{display:none}
 .nav-close{display:none}
 .nav-enroll-item{display:none}
+
 @media(max-width:860px){
   .nav-inner{height:64px}
   .nav-cta{display:none}
   .nav-toggle{display:block}
+
+  /* ── DRAWER: z-index above backdrop (210) ── */
   .nav-links{
-    display:flex;position:fixed;top:0;left:0;bottom:0;
-    width:82%;max-width:300px;background:var(--black);
-    flex-direction:column;align-items:stretch;padding:0;
-    z-index:220;overflow-y:auto;
+    display:flex;
+    position:fixed;top:0;left:0;bottom:0;
+    width:82%;max-width:300px;
+    background:var(--black);
+    flex-direction:column;align-items:stretch;
+    padding:0;
+    z-index:230; /* FIX: was 220, must beat backdrop 210 with headroom */
+    overflow-y:auto;
     transform:translateX(-100%);transition:transform .28s ease;
     border-right:1px solid rgba(255,255,255,.1);
+    /* FIX: ensure the drawer itself never blocks its own children */
+    pointer-events:auto;
   }
   .nav-links.open{transform:translateX(0)}
-  .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;
-    padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+
+  .nav-drawer-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0
+  }
   .nav-close{display:block;background:none;border:0;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;padding:4px}
   .nav-links li{border-bottom:1px solid rgba(255,255,255,.07)}
   .nav-links li:last-child{border-bottom:none}
-  .nav-links a{display:block;padding:16px 24px;font-size:1rem;font-weight:600;color:#ccc}
+
+  /* ── LINKS: fully tappable, no pointer-events conflicts ── */
+  .nav-links a{
+    display:block;
+    padding:18px 24px; /* FIX: slightly more tap area vs 16px */
+    font-size:1rem;font-weight:600;color:#ccc;
+    -webkit-tap-highlight-color:rgba(207,249,29,.15); /* FIX: visual feedback on tap */
+    touch-action:manipulation; /* FIX: no double-tap delay */
+    position:relative;
+    z-index:1; /* FIX: ensure links sit above any stacking context */
+  }
   .nav-links a:hover,.nav-links a:active{color:var(--lime)}
-  .nav-enroll-item{display:block;padding:20px 20px 4px;border:none !important}
-  .nav-enroll-item .btn{display:block;width:100%;text-align:center;padding:15px;font-size:1rem}
+
+  .nav-enroll-item{
+    display:block;
+    padding:20px 20px 4px;
+    border:none !important;
+    pointer-events:auto; /* FIX: explicit, never inherited as none */
+    position:relative;
+    z-index:231; /* FIX: above drawer z-index */
+  }
+  .nav-enroll-item .btn{
+    display:block;width:100%;text-align:center;padding:15px;font-size:1rem;
+    touch-action:manipulation; /* FIX: no delay on button tap */
+  }
   .nav-logo{height:38px}
 }
 
@@ -225,12 +270,22 @@ section{padding:84px 0}
 
 /* ---------- list with lime ticks ---------- */
 .ticks{list-style:none;padding:0;margin:0;display:grid;gap:.85rem}
-.ticks li{display:flex;gap:.75rem;align-items:flex-start;font-size:.97rem}
+.ticks li{display:flex;gap:.75rem;align-items:flex-start;font-size:.97rem;color:var(--ink)}
 .ticks li::before{content:"";flex:none;width:22px;height:22px;border-radius:6px;margin-top:2px;
   background:var(--lime);position:relative;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:center}
-.ticks.on-dark li::before{background:var(--lime)}
+
+/* FIX: ticks on dark / biz backgrounds — text must be light */
+.ticks.on-dark li,
+.duo-col.biz .ticks li,
+.dark-bg .ticks li,
+.biz-callout .ticks li{
+  color:#e7eaef;
+}
+
+/* ticks on skill (white) side — keep dark */
+.duo-col.skill .ticks li{color:var(--ink)}
 
 /* ---------- step / process ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
@@ -358,14 +413,14 @@ section{padding:84px 0}
 .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:36px}
 @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
 @media(max-width:480px){.footer-grid{grid-template-columns:1fr;gap:24px}}
-.footer h5{color:#fff;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 1.1rem;font-weight:800}
-.footer a{color:#aeb6c0;font-size:.92rem;display:block;padding:.32rem 0}
+.footer h5{color:#fff;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:800}
+.footer a{color:#aeb6c0;font-size:.88rem;display:block;padding:.32rem 0;margin-bottom:6px;text-decoration:none}
 .footer a:hover{color:var(--lime)}
 .footer .f-brand .brand-mark{margin-bottom:14px}
 .footer .f-brand p{font-size:.9rem;color:#9aa2ac;max-width:280px}
-.footer .subscribe{display:flex;gap:8px;margin-top:10px}
-.footer .subscribe input{flex:1;padding:.7rem .9rem;border-radius:8px;border:1px solid #2a2d33;background:#121316;color:#fff;font-family:var(--font)}
-.footer .subscribe button{padding:.7rem 1rem;border-radius:8px;border:0;background:var(--lime);color:#0a0d00;font-weight:800;cursor:pointer}
+.footer .subscribe{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.footer .subscribe input{flex:1;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid #333;background:#111;color:#fff;font-size:.85rem;font-family:var(--font)}
+.footer .subscribe button{padding:8px 14px;border-radius:8px;border:0;background:var(--lime);color:#0a0d00;font-weight:800;font-size:.85rem;cursor:pointer;white-space:nowrap}
 .footer-bottom{border-top:1px solid #1f2227;margin-top:48px;padding-top:24px;display:flex;
   justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#7e858f}
 .footer-bottom a{display:inline}
@@ -409,66 +464,28 @@ section{padding:84px 0}
 /* ---- ticks.sm ---- */
 .ticks.sm li{font-size:.9rem}
 
-/* ---- footer h5 ---- */
-.footer h5{color:#fff;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
-.footer a{display:block;color:#9aa2ac;font-size:.88rem;margin-bottom:6px;text-decoration:none}
-.footer a:hover{color:#fff}
-.footer .subscribe{display:flex;gap:6px;flex-wrap:wrap}
-.footer .subscribe input{flex:1;padding:8px 12px;border-radius:8px;border:1px solid #333;background:#111;color:#fff;font-size:.85rem}
-.footer .subscribe button{padding:8px 14px;background:var(--lime);color:#000;font-weight:700;font-size:.85rem;border-radius:8px;border:none;cursor:pointer}
-
 /* logo */
 .nav-logo{height:50px;width:auto;display:block}
 .footer-logo{height:50px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:12px}
 @media(max-width:860px){.nav-logo{height:42px}.footer-logo{height:42px}}
 .brand-fallback{display:none;align-items:center;gap:.6rem}
 
-
 /* =====================================================================
    MINI-MBA PAGE STYLES
+   Only mini-mba-specific components below. Global rules (container,
+   section, hero, grid-2, grid-3, hero-inner, hero-proof, lead) are
+   already declared above and must NOT be redeclared — doing so breaks
+   index.html by resetting padding, max-width and layout values.
    ===================================================================== */
 
-/* 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{overflow-x:hidden;max-width:100%}
-html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-
- */
-/* LAYOUT */
-
-.container{max-width:1160px;margin:0 auto;padding:0 28px}
-section{padding:88px 0}
-.section-head{margin-bottom:56px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-@media(max-width:900px){.grid-2{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.grid-3{grid-template-columns:1fr}}
-
-
-/* 
-
-/* HERO */
-
-.hero{background:var(--black);padding:96px 0 80px;overflow:hidden;position:relative}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(207,249,29,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(207,249,29,.04) 1px,transparent 1px);background-size:46px 46px;pointer-events:none}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 70% 60%,rgba(1,96,165,.22) 0%,transparent 70%);z-index:0}
-.hero .container{position:relative;z-index:1}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative}
+/* These classes only appear on mini-mba.html, not index.html — safe */
 .hero-copy h1{color:var(--white);margin:16px 0 24px}
 .hero-copy h1 em{color:var(--lime);font-style:normal}
 .hero-copy p{color:#b9c0ca;font-size:1.08rem;margin-bottom:32px;max-width:520px}
 .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid rgba(207,249,29,.35);border-radius:100px;font-size:.78rem;font-weight:700;color:var(--lime);letter-spacing:.04em}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero-cta .advisor{color:#9aa2ac;font-size:.84rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .hero-cta .advisor:hover{color:var(--white)}
-.hero-proof{display:flex;gap:36px;flex-wrap:wrap}
-.hero-proof .stat b{display:block;font-size:1.5rem;font-weight:900;color:#fff;line-height:1}
-.hero-proof .stat span{font-size:.75rem;font-weight:600;color:#9aa2ac;text-transform:uppercase;letter-spacing:.06em}
-.lead{color:#b9c0ca}
 .hero-visual{position:relative}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:22px 24px;backdrop-filter:blur(4px)}
@@ -478,10 +495,8 @@ section{padding:88px 0}
 .stat-card.accent{background:var(--lime);border-color:var(--lime)}
 .stat-card.accent .val{color:var(--black)}
 .stat-card.accent .lbl{color:rgba(0,0,0,.6)}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}}
+@media(max-width:900px){.hero-visual{display:none}}
 
-
-/* 
 .glance{background:var(--soft);border-top:3px solid var(--lime);border-bottom:1px solid var(--line);padding:0}
 .glance-inner{display:grid;grid-template-columns:repeat(6,1fr)}
 .glance-item{padding:28px 20px;border-right:1px solid var(--line)}
@@ -491,20 +506,13 @@ section{padding:88px 0}
 @media(max-width:960px){.glance-inner{grid-template-columns:repeat(3,1fr)}.glance-item{border-bottom:1px solid var(--line)}}
 @media(max-width:540px){.glance-inner{grid-template-columns:1fr 1fr}}
 
- */
 /* FOR WHO */
-
 .forwho{background:var(--soft)}
 .forwho-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.ticks{list-style:none;display:grid;gap:10px;margin-top:16px}
-.ticks li{display:flex;align-items:flex-start;gap:10px;font-size:.95rem;color:var(--ink)}
-.ticks li::before{content:"✓";width:22px;height:22px;background:var(--lime);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:var(--black);flex-shrink:0;margin-top:1px}
 .trade-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .trade-tag{padding:7px 14px;border:1px solid var(--blue);border-radius:100px;font-size:.8rem;font-weight:700;color:var(--blue)}
 @media(max-width:860px){.forwho-inner{grid-template-columns:1fr}}
 
-
-/* 
 .curriculum{background:var(--white)}
 .curr-rail{display:grid;gap:0}
 .curr-month{display:grid;grid-template-columns:64px 1fr;gap:0;position:relative}
@@ -525,9 +533,7 @@ section{padding:88px 0}
 .curr-output::before{content:"↗";font-size:.9rem}
 @media(max-width:700px){.curr-month{grid-template-columns:1fr}.curr-spine{display:none}.curr-body{padding:0 0 36px 0}}
 
- */
 /* CAPSTONE */
-
 .capstone{background:var(--soft);padding:88px 0}
 .capstone-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 .capstone h2{margin-bottom:16px}
@@ -546,20 +552,7 @@ section{padding:88px 0}
 .deliv-item p{font-size:.82rem;color:#9aa2ac;margin:0}
 @media(max-width:860px){.capstone-inner{grid-template-columns:1fr}}
 
-
-/* 
-.walkaway{background:var(--white);padding:88px 0}
-.walkaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-.walkaway-card{border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-.walkaway-card .wc-num{font-size:2.4rem;font-weight:900;color:var(--lime);line-height:1;margin-bottom:10px}
-.walkaway-card h4{font-size:.95rem;margin-bottom:6px}
-.walkaway-card p{font-size:.84rem;margin:0}
-@media(max-width:780px){.walkaway-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.walkaway-grid{grid-template-columns:1fr}}
-
- */
 /* ALUMNI */
-
 .alumni{background:var(--black);padding:88px 0}
 .alumni-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 .alumni h2{color:var(--white);margin-bottom:16px}
@@ -576,8 +569,7 @@ section{padding:88px 0}
 .alumni-tag{padding:6px 14px;border:1px solid #333;border-radius:100px;font-size:.78rem;color:#9aa2ac}
 @media(max-width:860px){.alumni-inner{grid-template-columns:1fr}}
 
-
-/* 
+/* PRICING */
 .pricing{background:var(--soft);padding:88px 0}
 .pricing h2{margin-bottom:8px}
 .pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px}
@@ -591,20 +583,21 @@ section{padding:88px 0}
 .price-card.dark h3{color:var(--white)}
 .price-amount{font-size:2.4rem;font-weight:900;color:var(--ink);line-height:1;margin-bottom:4px}
 .price-card.dark .price-amount{color:var(--white)}
-.price-amount em{font-style:normal;color:var(--lime-dark);font-size:1.4rem}
+.price-amount em{font-style:normal;color:var(--lime-deep);font-size:1.4rem}
 .price-per{font-size:.8rem;color:var(--muted);margin-bottom:20px}
 .price-divider{height:1px;background:var(--line);margin:20px 0}
 .price-card.dark .price-divider{background:#222}
 .price-list{list-style:none;display:grid;gap:10px;margin-bottom:28px;flex:1}
 .price-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--muted)}
-.price-list li::before{content:"✓";color:var(--lime-dark);font-weight:800;flex-shrink:0}
+.price-list li::before{content:"✓";color:var(--lime-darker);font-weight:800;flex-shrink:0}
 .price-card.dark .price-list li{color:#9aa2ac}
 .price-card.dark .price-list li::before{color:var(--lime)}
 .price-contact{font-size:.82rem;color:var(--lime);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:860px){.pricing-grid{grid-template-columns:1fr}}
 
- */
-/* MOBILE FIXES */
+/* ===========================================================
+   MOBILE FIXES
+   =========================================================== */
 @media(max-width:640px){
   .grid-2,.spec-grid,.capstone-inner,.cert-inner,.alumni-inner,.forwho-inner,.problem-grid{
     grid-template-columns:1fr !important;
@@ -624,352 +617,219 @@ section{padding:88px 0}
   .cert-grade-grid{grid-template-columns:1fr 1fr}
   section{padding:48px 0}
   .container{padding:0 18px !important;max-width:100% !important}
-  /* hero CTA stack on mobile */
   .hero-cta{flex-direction:column !important;align-items:stretch !important;gap:10px !important}
   .hero-cta .btn{width:100% !important;text-align:center !important;box-sizing:border-box !important;white-space:normal !important}
   .hero-tags{gap:6px;flex-wrap:wrap}
   .hero-tag{font-size:.7rem;padding:4px 10px;white-space:normal}
-  /* hero proof stats */
   .hero-proof{gap:20px;flex-wrap:wrap}
-  /* prevent any element going wider than screen */
   *{max-width:100%;box-sizing:border-box}
   img{max-width:100%}
 }
 
 /* ===========================================================
-   FIXES & MISSING VARIABLES
+   BUTTON VARIANT — outline on dark
    =========================================================== */
-
-/* --muted was referenced but never defined */
-:root {
-  --muted: #7b8088;
+.btn-outline-on-dark{
+  background:transparent;
+  border:2px solid rgba(207,249,29,.45);
+  color:#fff;
+}
+.btn-outline-on-dark:hover{
+  border-color:var(--lime);
+  color:var(--lime);
+  transform:translateY(-2px);
 }
 
 /* ===========================================================
-   NAV — mobile triple-logo fix
-   The brand in nav-drawer-header duplicates the main brand.
-   On mobile, hide the main .brand in the header bar entirely
-   (the drawer header has its own brand). Also ensure fallback
-   never shows alongside the real logo simultaneously.
+   PROBLEM SECTION
    =========================================================== */
-@media (max-width: 860px) {
-  /* Only ONE logo shows in the header bar on mobile */
+.problem{background:var(--white)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:860px){.problem-grid{grid-template-columns:1fr}}
+.problem-cards{display:grid;gap:12px}
+.problem-card{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:#fff7f7;border:1px solid #ffe0e0;border-radius:10px}
+.problem-card .px{color:#e00;font-size:1rem;font-weight:900;flex-shrink:0;margin-top:1px}
+.problem-card p{margin:0;color:var(--gray);font-size:.92rem}
+.answer-cards{display:grid;gap:10px;margin-top:4px}
+.answer-card{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:#f0fff0;border:1px solid #c3e6c3;border-radius:10px}
+.answer-card .ck{color:#1a7a1a;font-weight:900;flex-shrink:0;margin-top:1px}
+.answer-card p{margin:0;color:var(--ink);font-size:.92rem}
+
+/* ===========================================================
+   SPEC CARDS
+   =========================================================== */
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.spec-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.spec-grid{grid-template-columns:1fr}}
+.spec-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:transform .2s,box-shadow .2s}
+.spec-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.spec-card h4{font-size:1rem;margin-bottom:.4rem}
+.spec-card p{font-size:.88rem;color:var(--gray);margin:0}
+.spec-tag{display:inline-block;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);background:rgba(1,96,165,.08);padding:3px 10px;border-radius:99px;margin-bottom:10px}
+
+/* ===========================================================
+   CERTIFICATE SECTION
+   =========================================================== */
+.certificate{background:var(--soft)}
+.cert-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:860px){.cert-inner{grid-template-columns:1fr}}
+.cert-name{font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:900;margin-bottom:4px}
+.cert-sub{font-size:.9rem;color:var(--gray);margin-bottom:24px}
+.cert-grade{margin-top:20px}
+.grade{display:inline-flex;align-items:center;gap:8px}
+.cert-grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.cert-badge{background:var(--black);border-radius:var(--radius);padding:18px 20px;text-align:center}
+.cert-badge-title{font-size:1.4rem;font-weight:900;color:var(--lime);line-height:1}
+.cert-badge-sub{font-size:.72rem;color:#9aa2ac;margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+.cert-table{width:100%;border-collapse:collapse;margin-top:16px}
+.cert-table th,.cert-table td{padding:10px 14px;border:1px solid var(--line);font-size:.88rem;text-align:left}
+.cert-table th{background:var(--soft);font-weight:700}
+.range{display:inline-block;font-size:.78rem;font-weight:700;color:var(--blue);background:rgba(1,96,165,.08);padding:3px 10px;border-radius:6px}
+
+/* ===========================================================
+   PRICECARD inside grid
+   =========================================================== */
+.grid-2 .pricecard{max-width:100%}
+
+/* ===========================================================
+   FOOTER subscribe form
+   =========================================================== */
+footer form[data-form="subscribe"]{display:flex;gap:6px;flex-wrap:wrap}
+footer form[data-form="subscribe"] input{flex:1;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid #333;background:#111;color:#fff;font-size:.85rem}
+footer form[data-form="subscribe"] button{padding:8px 14px;background:var(--lime);color:#000;font-weight:700;font-size:.85rem;border-radius:8px;border:none;cursor:pointer;white-space:nowrap}
+
+/* ===========================================================
+   DARK CARD TEXT FIX
+   =========================================================== */
+.dark-bg .card{background:rgba(255,255,255,.05);border-color:#222}
+.dark-bg .card h3{color:#fff}
+.dark-bg .card p{color:#b9c0ca}
+.stats-band .s b{color:var(--blue)}
+.dark-bg.section .card h3,section.dark-bg .card h3{color:#fff}
+section.dark-bg .card{background:#111;border-color:#222}
+section.dark-bg .card p{color:#b9c0ca}
+
+/* ===========================================================
+   MOBILE NAV — logo fix
+   Show only the real logo image in the drawer header.
+   Hide the .brand-mark square and .brand-fallback text
+   unconditionally — only .nav-logo (the <img>) should show.
+   =========================================================== */
+@media(max-width:860px){
+  /* Header bar brand: keep visible, hide fallback */
+  .nav-inner > .brand { display: flex; }
   .nav-inner > .brand .brand-fallback { display: none !important; }
-  /* Drawer header brand text is always white */
-  .nav-drawer-header .brand-txt b { color: #fff; }
-}
 
-/* ===========================================================
-   BUTTON VARIANT — outline on dark (used in index.html hero)
-   =========================================================== */
-.btn-outline-on-dark {
-  background: transparent;
-  border: 2px solid rgba(207,249,29,.45);
-  color: #fff;
+  /* Drawer header: hide BOTH the square mark and the fallback text brand.
+     Only the <img class="nav-logo"> should remain. */
+  .nav-drawer-header .brand-mark    { display: none !important; }
+  .nav-drawer-header .brand-fallback{ display: none !important; }
+  .nav-drawer-header .brand-txt b   { color: #fff; }
 }
-.btn-outline-on-dark:hover {
-  border-color: var(--lime);
-  color: var(--lime);
-  transform: translateY(-2px);
-}
-
-/* ===========================================================
-   PROBLEM SECTION (mini-mba)
-   =========================================================== */
-.problem { background: var(--white); }
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-@media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
-
-.problem-cards { display: grid; gap: 12px; }
-.problem-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 18px;
-  background: #fff7f7;
-  border: 1px solid #ffe0e0;
-  border-radius: 10px;
-}
-.problem-card .px {
-  color: #e00;
-  font-size: 1rem;
-  font-weight: 900;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.problem-card p { margin: 0; color: var(--gray); font-size: .92rem; }
-
-.answer-cards { display: grid; gap: 10px; margin-top: 4px; }
-.answer-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 16px;
-  background: #f0fff0;
-  border: 1px solid #c3e6c3;
-  border-radius: 10px;
-}
-.answer-card .ck {
-  color: #1a7a1a;
-  font-weight: 900;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.answer-card p { margin: 0; color: var(--ink); font-size: .92rem; }
-
-/* ===========================================================
-   SPEC CARDS (mini-mba specialisation section)
-   =========================================================== */
-.specs { }
-.specs-head { margin-bottom: 28px; }
-.spec-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-@media (max-width: 860px) { .spec-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .spec-grid { grid-template-columns: 1fr; } }
-
-.spec-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 24px;
-  transition: transform .2s, box-shadow .2s;
-}
-.spec-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-.spec-card h4 { font-size: 1rem; margin-bottom: .4rem; }
-.spec-card p { font-size: .88rem; color: var(--gray); margin: 0; }
-.spec-tag {
-  display: inline-block;
-  font-size: .68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--blue);
-  background: rgba(1,96,165,.08);
-  padding: 3px 10px;
-  border-radius: 99px;
-  margin-bottom: 10px;
-}
-
-/* ===========================================================
-   CERTIFICATE SECTION (mini-mba)
-   =========================================================== */
-.certificate { background: var(--soft); }
-.cert-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-@media (max-width: 860px) { .cert-inner { grid-template-columns: 1fr; } }
-
-.cert-name {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  font-weight: 900;
-  margin-bottom: 4px;
-}
-.cert-sub { font-size: .9rem; color: var(--gray); margin-bottom: 24px; }
-
-.cert-grade { margin-top: 20px; }
-.grade { display: inline-flex; align-items: center; gap: 8px; }
-
-.cert-grade-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 16px;
-}
-.cert-badge {
-  background: var(--black);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  text-align: center;
-}
-.cert-badge-title {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: var(--lime);
-  line-height: 1;
-}
-.cert-badge-sub {
-  font-size: .72rem;
-  color: #9aa2ac;
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-
-/* cert-table used in certification breakdown */
-.cert-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-.cert-table th, .cert-table td {
-  padding: 10px 14px;
-  border: 1px solid var(--line);
-  font-size: .88rem;
-  text-align: left;
-}
-.cert-table th { background: var(--soft); font-weight: 700; }
-
-/* range (grading range display) */
-.range {
-  display: inline-block;
-  font-size: .78rem;
-  font-weight: 700;
-  color: var(--blue);
-  background: rgba(1,96,165,.08);
-  padding: 3px 10px;
-  border-radius: 6px;
-}
-
-/* ===========================================================
-   GLANCE BAR (mini-mba at-a-glance strip)
-   =========================================================== */
-.glance {
-  background: var(--soft);
-  border-top: 3px solid var(--lime);
-  border-bottom: 1px solid var(--line);
-  padding: 0;
-}
-.glance-inner {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-}
-.glance-item {
-  padding: 24px 20px;
-  border-right: 1px solid var(--line);
-}
-.glance-item:last-child { border-right: none; }
-.glance-item .gi-label {
-  font-size: .65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-.glance-item .gi-val {
-  font-size: .98rem;
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.2;
-}
-@media (max-width: 960px) {
-  .glance-inner { grid-template-columns: repeat(3, 1fr); }
-  .glance-item { border-bottom: 1px solid var(--line); }
-}
-@media (max-width: 540px) {
-  .glance-inner { grid-template-columns: 1fr 1fr; }
-}
-
-/* ===========================================================
-   DESKTOP LAYOUT FIXES (homepage hero CTA buttons)
-   =========================================================== */
-
-/* Ensure hero section on index.html doesn't wrap badly on desktop */
-.hero-inner {
-  display: grid;
-  /* index.html hero is single-column */
-}
-
-/* ===========================================================
-   PRICECARD — ensure max-width doesn't crush them inside grid
-   =========================================================== */
-.grid-2 .pricecard { max-width: 100%; }
-
-/* ===========================================================
-   FOOTER — subscribe form (footer email input + button)
-   =========================================================== */
-footer form[data-form="subscribe"] {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-footer form[data-form="subscribe"] input {
-  flex: 1;
-  min-width: 0;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #111;
-  color: #fff;
-  font-size: .85rem;
-}
-footer form[data-form="subscribe"] button {
-  padding: 8px 14px;
-  background: var(--lime);
-  color: #000;
-  font-weight: 700;
-  font-size: .85rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-/* ===========================================================
-   DARK CARD TEXT FIX (cards on dark backgrounds)
-   Cards inside .dark-bg sections get dark bg but text stays dark
-   unless explicitly set. Fix that.
-   =========================================================== */
-.dark-bg .card { background: rgba(255,255,255,.05); border-color: #222; }
-.dark-bg .card h3 { color: #fff; }
-.dark-bg .card p { color: #b9c0ca; }
-
-/* stats-band inside white section — ensure text readable */
-.stats-band .s b { color: var(--blue); }
-
-/* ===========================================================
-   ABOUT PAGE — dark section card duplication fix
-   =========================================================== */
-.dark-bg.section .card h3,
-section.dark-bg .card h3 { color: #fff; }
-section.dark-bg .card { background: #111; border-color: #222; }
-section.dark-bg .card p { color: #b9c0ca; }
 
 /* ===========================================================
    MOBILE RESPONSIVE FINAL PASS
    =========================================================== */
-@media (max-width: 640px) {
-  .problem-grid { grid-template-columns: 1fr !important; }
-  .spec-grid { grid-template-columns: 1fr !important; }
-  .cert-inner { grid-template-columns: 1fr !important; }
-  .cert-grade-grid { grid-template-columns: 1fr 1fr; }
-  /* hero dual CTA buttons on index.html */
-  .hero-inner > div[style*="grid-template-columns:1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
-  /* pricing grid in mini-mba */
-  .pricing-grid[style*="grid-template-columns:repeat(3"] {
-    grid-template-columns: 1fr !important;
-  }
+@media(max-width:640px){
+  .problem-grid{grid-template-columns:1fr !important}
+  .spec-grid{grid-template-columns:1fr !important}
+  .cert-inner{grid-template-columns:1fr !important}
+  .cert-grade-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr !important}
 }
 
 /* ===========================================================
-   MOBILE NAV — DEFINITIVE LOGO FIX
-   On mobile: hide the main header brand (the drawer has its own).
-   Only the hamburger toggle + Enroll CTA-in-drawer remain visible.
+   HERO CTA CARDS (index.html — replaces inline grid buttons)
    =========================================================== */
-@media (max-width: 860px) {
-  /* Hide main brand in header bar — drawer shows its own */
-  .nav-inner > .brand { display: none; }
-  /* But show it when JS hasn't run yet (no-js fallback): 
-     if .nav-links is not .open, still show the brand */
-  .nav-inner { justify-content: space-between; }
+.hero-cta-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+  /* FIX 1: was 600px — hero-inner is max-width:780px so cards
+     were orphaned with empty space to their right on desktop.
+     Let them fill the hero column naturally. */
+  max-width: 580px;
 }
-/* Actually we want brand visible in header on mobile for non-open state.
-   The real fix: only ONE logo shows, always. 
-   Revert the hide above — instead just hide the fallback unless img errors */
-@media (max-width: 860px) {
-  .nav-inner > .brand { display: flex; } /* restore */
-  /* Ensure the brand-fallback span only appears when img fails (onerror sets it) */
-  /* The onerror already handles this — the issue is CSS overriding display:none */
-  .nav-inner > .brand .brand-fallback[style*="display:none"] { display: none !important; }
-  /* Drawer header logo: always show, hide its brand-fallback unless img errors */
-  .nav-drawer-header .brand .brand-fallback[style*="display:none"] { display: none !important; }
+.hero-cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  /* FIX 2: cards must stretch to equal height so both columns
+     are the same size regardless of text length */
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.hero-cta-card:active { transform: translateY(1px); }
+.hero-cta-card__label {
+  font-size: .67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 5px;
+  display: block;
+}
+.hero-cta-card__title {
+  font-size: 1rem;
+  font-weight: 800;
+  display: block;
+  line-height: 1.2;
+}
+.hero-cta-card__sub {
+  font-size: .8rem;
+  font-weight: 500;
+  margin-top: 4px;
+  display: block;
+  line-height: 1.4;
+}
+
+/* Primary card — lime */
+.hero-cta-card--primary {
+  background: var(--lime);
+  border: 2px solid var(--lime);
+  color: #000;
+}
+.hero-cta-card--primary .hero-cta-card__label { color: rgba(0,0,0,.55); }
+.hero-cta-card--primary .hero-cta-card__sub   { color: rgba(0,0,0,.6); }
+.hero-cta-card--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -12px rgba(166,200,0,.7);
+}
+
+/* Outline card — dark border, white text */
+.hero-cta-card--outline {
+  background: transparent;
+  border: 2px solid rgba(207,249,29,.45);
+  color: #fff;
+}
+.hero-cta-card--outline .hero-cta-card__label { color: var(--lime); }
+.hero-cta-card--outline .hero-cta-card__sub   { color: rgba(255,255,255,.6); }
+.hero-cta-card--outline:hover {
+  border-color: var(--lime);
+  transform: translateY(-2px);
+}
+
+/* FIX 3: tablet breakpoint (861px–960px) — cards start to feel
+   cramped at 2-col before mobile kicks in. Reduce padding. */
+@media (max-width: 960px) and (min-width: 541px) {
+  .hero-cta-cards { max-width: 100%; }
+  .hero-cta-card  { padding: 14px 16px; }
+}
+
+/* FIX 4: Mobile — stack cards full width.
+   Also override the global *{max-width:100%} that was set in
+   the 640px block, which can crush .hero-cta-cards width. */
+@media (max-width: 540px) {
+  .hero-cta-cards {
+    grid-template-columns: 1fr;
+    max-width: 100% !important;
+    width: 100%;
+  }
+  .hero-cta-card {
+    height: auto; /* no need to stretch in single-col layout */
+  }
 }
