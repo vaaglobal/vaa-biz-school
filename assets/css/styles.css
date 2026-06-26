@@ -609,17 +609,36 @@ CERTIFICATE
 .price-contact{font-size:.82rem;color:var(--lime);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:860px){.pricing-grid{grid-template-columns:1fr}}
 
- */
-FINAL CTA
-/* 
+/* =====================================================================
+   FINAL CTA (MBA PAGE)
+   ===================================================================== */
+.final-cta{background:var(--black);padding:96px 0;text-align:center}
+.final-cta h2{color:var(--white);font-size:clamp(2rem,4vw,3.4rem);max-width:700px;margin:16px auto 24px}
+.final-cta p{color:#9aa2ac;max-width:520px;margin:0 auto 40px;font-size:1.05rem}
+.final-cta .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+.final-cta .advisor-link{color:#9aa2ac;font-size:.88rem;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* =====================================================================
+   REVEAL ANIMATION
+   ===================================================================== */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
- */
-MOBILE FIXES
-/* MBA MOBILE FIXES */
-/* ===== MOBILE FIXES ===== */
+/* =====================================================================
+   MOBILE SAFETY NET (all pages)
+   ===================================================================== */
+@media(max-width:480px){
+  h1{font-size:clamp(1.6rem,7vw,2.4rem);word-break:break-word;overflow-wrap:break-word}
+  h2{font-size:clamp(1.3rem,5.5vw,2rem);word-break:break-word}
+  .container{padding:0 16px}
+  .hero-cta{flex-wrap:wrap;gap:10px}
+  .hero-cta .btn{min-width:0;flex:1 1 100%}
+}
+
+/* =====================================================================
+   MINI-MBA PAGE — MOBILE FIXES (scoped to MBA-specific classes only)
+   ===================================================================== */
 @media(max-width:640px){
   .grid-2,.spec-grid,.capstone-inner,.cert-inner,.alumni-inner,.forwho-inner,.problem-grid{
     grid-template-columns:1fr !important;
@@ -628,25 +647,14 @@ MOBILE FIXES
   .curr-spine{display:none}
   .curr-body{padding:0 0 32px}
   .pricing-grid{grid-template-columns:1fr !important}
-  .hero-inner{padding:40px 0 48px;max-width:100% !important}
-  h1{font-size:clamp(1.35rem,5vw,1.9rem) !important;word-break:break-word;overflow-wrap:break-word}
-  h2{font-size:clamp(1.3rem,5vw,1.8rem) !important;word-break:break-word}
-  h3{font-size:1.1rem !important}
-  p{font-size:.9rem}
+  .hero-inner{padding:40px 0 48px}
   .stat-grid{grid-template-columns:1fr 1fr}
   .glance-inner{grid-template-columns:1fr 1fr}
   .walkaway-grid{grid-template-columns:1fr}
   .cert-grade-grid{grid-template-columns:1fr 1fr}
-  section{padding:48px 0}
-  .container{padding:0 18px !important;max-width:100% !important}
-  /* hero CTA stack on mobile */
   .hero-cta{flex-direction:column !important;align-items:stretch !important;gap:10px !important}
-  .hero-cta .btn{width:100% !important;text-align:center !important;box-sizing:border-box !important;white-space:normal !important}
+  .hero-cta .btn{width:100% !important;text-align:center !important;white-space:normal !important}
   .hero-tags{gap:6px;flex-wrap:wrap}
   .hero-tag{font-size:.7rem;padding:4px 10px;white-space:normal}
-  /* hero proof stats */
   .hero-proof{gap:20px;flex-wrap:wrap}
-  /* prevent any element going wider than screen */
-  *{max-width:100%;box-sizing:border-box}
-  img{max-width:100%}
 }

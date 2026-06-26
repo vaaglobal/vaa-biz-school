@@ -6,7 +6,7 @@ const { TRACKS,SITE,BRAND,SHORT,PRICE,PRICE_PLAIN,WA,WAD,EMAIL,OG,
 /* =====================================================================  HOME  */
 function buildIndex(){
   const trackCards = TRACKS.map(t=>`
-<a class="card reveal" href="courses/${t.slug}.html">
+<a class="card reveal" href="courses/${t.slug}">
   <span class="track-icon">${t.emoji}</span>
   <h3>${esc(t.name)}</h3>
   <p>${esc(t.short)}</p>
@@ -22,12 +22,12 @@ function buildIndex(){
       <h1>The business school built <em>/</em> for Nigerian artisans.</h1>
       <p class="lead">You already know how to do the work. We teach the business and brand side — pricing, clients, marketing and money management. Start with a focused 5-week track for your trade, or go all-in with the full 3-month Mini-MBA.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;max-width:640px">
-        <a class="btn btn-primary btn-lg" href="tracks.html" style="flex-direction:column;align-items:flex-start;padding:18px 22px;height:auto;border-radius:12px">
+        <a class="btn btn-primary btn-lg" href="tracks" style="flex-direction:column;align-items:flex-start;padding:18px 22px;height:auto;border-radius:12px">
           <span style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:4px">5-week program</span>
           <span style="font-size:1rem;font-weight:800">Business Tracks</span>
           <span style="font-size:.8rem;font-weight:500;opacity:.75;margin-top:2px">Pick the track for your trade</span>
         </a>
-        <a class="btn btn-outline-on-dark btn-lg" href="mini-mba.html" style="flex-direction:column;align-items:flex-start;padding:18px 22px;height:auto;border-radius:12px;border:2px solid rgba(207,249,29,.5);color:#fff">
+        <a class="btn btn-outline-on-dark btn-lg" href="mini-mba" style="flex-direction:column;align-items:flex-start;padding:18px 22px;height:auto;border-radius:12px;border:2px solid rgba(207,249,29,.5);color:#fff">
           <span style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lime);margin-bottom:4px">3-month full program</span>
           <span style="font-size:1rem;font-weight:800">The Mini-MBA</span>
           <span style="font-size:.8rem;font-weight:500;opacity:.65;margin-top:2px">All 6 topics · capstone · certificate</span>
@@ -82,7 +82,7 @@ function buildIndex(){
     <p>Every track is built for people who already have the skill. We focus entirely on the business side: branding, pricing, clients, marketing, and money management.</p>
   </div>
   <div class="grid grid-3">${trackCards}</div>
-  <div style="margin-top:36px"><a class="btn btn-blue" href="tracks.html">Compare all six tracks &rarr;</a></div>
+  <div style="margin-top:36px"><a class="btn btn-blue" href="tracks">Compare all six tracks &rarr;</a></div>
 </div>
 </section>
 
@@ -126,8 +126,8 @@ function buildIndex(){
       <p style="color:rgba(0,0,0,.65);margin-top:8px">3 months · 6 topics · capstone project · certificate. The complete program for artisans who are serious.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0">
-      <a class="btn btn-dark btn-lg" href="mini-mba.html">See the full program</a>
-      <a class="btn" style="background:transparent;border:2px solid rgba(0,0,0,.25);color:var(--black);padding:13px 26px;font-size:.9rem;border-radius:8px;text-align:center;font-weight:700" href="enroll.html">Enroll now</a>
+      <a class="btn btn-dark btn-lg" href="mini-mba">See the full program</a>
+      <a class="btn" style="background:transparent;border:2px solid rgba(0,0,0,.25);color:var(--black);padding:13px 26px;font-size:.9rem;border-radius:8px;text-align:center;font-weight:700" href="enroll">Enroll now</a>
     </div>
   </div>
 </div>
@@ -162,11 +162,11 @@ function buildTracks(){
   <p>${esc(t.short)}</p>
   <h4 style="font-size:.85rem;margin-top:16px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue)">Who it is for</h4>
   <ul class="ticks sm">${t.audience.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>
-  <a class="btn btn-primary" style="margin-top:20px" href="courses/${t.slug}.html">View full track &rarr;</a>
+  <a class="btn btn-primary" style="margin-top:20px" href="courses/${t.slug}">View full track &rarr;</a>
 </div>`).join("");
 
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>All tracks</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>All tracks</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div class="section-head">
@@ -181,7 +181,7 @@ function buildTracks(){
 <div class="container">
   <div class="cta-strip reveal">
     <div><h2>Not sure which track suits your trade?</h2><p>Tell us what you do and we will point you to the right one.</p></div>
-    <a class="btn btn-dark btn-lg" href="contact.html">Get in touch</a>
+    <a class="btn btn-dark btn-lg" href="contact">Get in touch</a>
   </div>
 </div>
 </section>`;
@@ -198,7 +198,7 @@ function buildTracks(){
 /* =====================================================================  ABOUT */
 function buildAbout(){
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>About</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>About</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div class="section-head">
@@ -243,7 +243,7 @@ function buildAbout(){
 <div class="container">
   <div class="cta-strip reveal">
     <div><h2>Ready to build the business side of your trade?</h2><p>Pick a track and start this week.</p></div>
-    <a class="btn btn-dark btn-lg" href="tracks.html">See the tracks</a>
+    <a class="btn btn-dark btn-lg" href="tracks">See the tracks</a>
   </div>
 </div>
 </section>`;
@@ -260,7 +260,7 @@ function buildAbout(){
 /* =====================================================================  PRICING */
 function buildPricing(){
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Pricing</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>Pricing</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div class="section-head center">
@@ -285,7 +285,7 @@ function buildPricing(){
           <li>Certificate of completion</li>
           <li>Alumni community access</li>
         </ul>
-        <a class="btn btn-primary btn-block btn-lg" href="tracks.html">Choose your track</a>
+        <a class="btn btn-primary btn-block btn-lg" href="tracks">Choose your track</a>
         <p class="form-note center" style="margin-top:14px">Secure payment via Paystack</p>
       </div>
     </div>
@@ -306,7 +306,7 @@ function buildPricing(){
           <li>Alumni network access</li>
           <li>Pay in instalments: 50% + 25% + 25%</li>
         </ul>
-        <a class="btn btn-dark btn-block btn-lg" href="mini-mba.html">See the Mini-MBA</a>
+        <a class="btn btn-dark btn-block btn-lg" href="mini-mba">See the Mini-MBA</a>
         <p class="form-note center" style="margin-top:14px">Payment plans available on the Mini-MBA page</p>
       </div>
     </div>
@@ -329,7 +329,7 @@ function buildPricing(){
 <div class="container">
   <div class="cta-strip reveal">
     <div><h2>Not sure where to start?</h2><p>Talk to us and we will point you to the right option for your trade and your goals.</p></div>
-    <a class="btn btn-dark btn-lg" href="contact.html">Talk to us</a>
+    <a class="btn btn-dark btn-lg" href="contact">Talk to us</a>
   </div>
 </div>
 </section>`;
@@ -347,15 +347,15 @@ function buildPricing(){
 function buildEnroll(){
   const trackOpts = TRACKS.map(t=>`<option value="${t.slug}" data-price="35000">${esc(t.name)} — &#8358;35,000</option>`).join("");
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Enroll</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>Enroll</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div id="successBox" class="form-card hide" style="border:2px solid var(--lime-deep);margin-bottom:30px">
-    <span class="eyebrow">Payment received</span>
+    <span class="eyebrow">Application received</span>
     <h2 style="font-size:1.6rem">You are in. Welcome to the cohort.</h2>
-    <p style="color:var(--gray)">We have your payment. Our team will reach you within two hours with your cohort details.</p>
-    <p class="form-note">Payment reference: <b id="payRef"></b></p>
-    <a class="btn btn-primary" href="contact.html">Get in touch with us</a>
+    <p style="color:var(--gray)">We have received your application. Our team will reach you within two hours with payment details and your cohort start date.</p>
+    <p class="form-note">Application reference: <b id="payRef"></b></p>
+    <a class="btn btn-primary" href="contact">Get in touch with us</a>
   </div>
   <div class="course-layout" style="padding-top:0">
     <div class="course-body">
@@ -411,7 +411,7 @@ function buildEnroll(){
             <li>Certificate of completion</li>
             <li>Alumni community access</li>
           </ul>
-          <p class="form-note" style="margin-top:12px">Questions? <a href="contact.html" style="color:var(--lime);font-weight:700">Talk to us first</a>.</p>
+          <p class="form-note" style="margin-top:12px">Questions? <a href="contact" style="color:var(--lime);font-weight:700">Talk to us first</a>.</p>
         </div>
       </div>
     </aside>
@@ -449,7 +449,7 @@ function buildFaq(){
 </details>`).join("");
 
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>FAQ</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>FAQ</span></div></div>
 <section style="padding-top:24px">
 <div class="container" style="max-width:840px">
   <div class="section-head">
@@ -459,8 +459,8 @@ function buildFaq(){
   </div>
   <div>${items}</div>
   <div style="margin-top:40px">
-    <a class="btn btn-primary btn-lg" href="enroll.html">Enroll now</a>
-    <a class="btn btn-ghost btn-lg" href="contact.html">Ask us a question</a>
+    <a class="btn btn-primary btn-lg" href="enroll">Enroll now</a>
+    <a class="btn btn-ghost btn-lg" href="contact">Ask us a question</a>
   </div>
 </div>
 </section>`;
@@ -480,7 +480,7 @@ function buildFaq(){
 /* =====================================================================  CONTACT */
 function buildContact(){
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Contact</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>Contact</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div class="grid grid-2" style="align-items:start;gap:44px">
@@ -560,58 +560,11 @@ function buildContact(){
   }));
 }
 
-/* =====================================================================  BLOG */
-const POSTS = [
-  {slug:"pricing-your-services-nigeria", title:"How to price your services as an artisan in Nigeria (without guessing)", desc:"The three numbers every Nigerian artisan must know before setting a price — and a simple formula to calculate them.", kw:"how to price services Nigeria, artisan pricing Nigeria, trade service pricing"},
-  {slug:"get-clients-nigeria-artisan", title:"How to get your first 10 clients as a Nigerian artisan (no ad budget needed)", desc:"Step-by-step tactics for tailors, bakers, mechanics, photographers and other tradespeople to build a real client base from zero.", kw:"how to get clients Nigeria, artisan marketing Nigeria, grow trade business"},
-  {slug:"whatsapp-business-artisans-nigeria", title:"How to use WhatsApp Business to grow your trade in Nigeria", desc:"Practical setup and content strategies for Nigerian artisans using WhatsApp Status, broadcast lists and quick replies to convert more clients.", kw:"WhatsApp Business for artisans Nigeria, WhatsApp marketing trade Nigeria"},
-  {slug:"instagram-for-tradesperson-nigeria", title:"Instagram for tradespeople: how Nigerian tailors, bakers and mechanics get clients from it", desc:"What to post, when to post, and how to turn Instagram followers into paying clients — for people who make or fix things.", kw:"Instagram for artisans Nigeria, social media for tradespeople Nigeria"},
-  {slug:"how-to-build-website-artisan-nigeria", title:"How to build a simple website or booking page for your trade in Nigeria", desc:"Free and cheap tools to put your services online so clients can find you, book you, and pay you — no coding needed.", kw:"website for artisan Nigeria, booking page Nigeria no-code, online presence for tradespeople"},
-  {slug:"money-management-artisan-nigeria", title:"Money management for Nigerian artisans: stop spending your business income", desc:"How to separate your personal and business money, track your real profit, and build savings as a self-employed tradesperson.", kw:"money management artisan Nigeria, financial discipline self-employed Nigeria"}
-];
-
-function buildBlog(){
-  const cards = POSTS.map(p=>`
-<article class="card reveal">
-  <h3><a href="blog/${p.slug}.html" style="color:inherit;text-decoration:none">${esc(p.title)}</a></h3>
-  <p>${esc(p.desc)}</p>
-  <a href="blog/${p.slug}.html" class="cr-go" style="margin-top:14px;display:inline-flex;color:var(--blue);font-weight:800;font-size:.85rem">Read &rarr;</a>
-</article>`).join("");
-
-  const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Resources</span></div></div>
-<section style="padding-top:24px">
-<div class="container">
-  <div class="section-head">
-    <span class="eyebrow">Resources</span>
-    <h1>Practical guides for Nigerian artisans building a business</h1>
-    <p>Everything here is aimed at one outcome: helping Nigerian artisans and tradespeople earn more from skills they already have.</p>
-  </div>
-  <div class="grid grid-3">${cards}</div>
-</div>
-</section>
-<section class="soft-bg">
-<div class="container">
-  <div class="cta-strip reveal">
-    <div><h2>Ready to go beyond guides and actually build your business?</h2><p>Enrol in the right track and start this week.</p></div>
-    <a class="btn btn-dark btn-lg" href="tracks.html">See the tracks</a>
-  </div>
-</div>
-</section>`;
-
-  write("blog.html", page({
-    path:"blog.html", depth:0, crumb:"Resources",
-    title:"Resources for Nigerian Artisans | VAA Business School",
-    desc:"Practical guides on branding, pricing, getting clients, Instagram and Facebook ads and money management for Nigerian artisans. VAA Global Business School.",
-    kw:"artisan business guides Nigeria, how to grow trade business blog, Nigerian tradesperson tips",
-    body
-  }));
-}
 
 /* =====================================================================  REFERRAL */
 function buildReferral(){
   const body = `
-<div class="container"><div class="crumb"><a href="index.html">Home</a> / <span>Referral</span></div></div>
+<div class="container"><div class="crumb"><a href="./">Home</a> / <span>Referral</span></div></div>
 <section style="padding-top:24px">
 <div class="container">
   <div class="section-head">
@@ -669,7 +622,7 @@ function buildTrackPage(t){
 <div class="pain-card"><span class="pain-x">✕</span><p>${esc(p)}</p></div>`).join("");
   const outcomes = t.outcomes.map(o=>`<li>${esc(o)}</li>`).join("");
   const related = TRACKS.filter(x=>x.slug!==t.slug).slice(0,3).map(r=>`
-<a class="card reveal" href="${r.slug}.html">
+<a class="card reveal" href="${r.slug}">
   <span class="track-icon">${r.emoji}</span>
   <h3>${esc(r.name)}</h3>
   <p>${esc(r.short)}</p>
@@ -682,7 +635,7 @@ function buildTrackPage(t){
 </details>`).join("");
 
   const body = `
-<div class="container"><div class="crumb"><a href="../index.html">Home</a> / <a href="../tracks.html">Tracks</a> / <span>${esc(t.name)}</span></div></div>
+<div class="container"><div class="crumb"><a href="../">Home</a> / <a href="../tracks">Tracks</a> / <span>${esc(t.name)}</span></div></div>
 <section class="course-hero" style="padding-top:10px">
 <div class="container">
   <div class="inner">
@@ -697,7 +650,7 @@ function buildTrackPage(t){
     </div>
     <div class="hero-cta" style="margin-top:26px">
       <a class="btn btn-primary btn-lg" href="../enroll.html?course=${t.slug}">Start building your business</a>
-      <a class="btn btn-ghost on-dark btn-lg" href="../contact.html">I have a question first</a>
+      <a class="btn btn-ghost on-dark btn-lg" href="../contact">I have a question first</a>
     </div>
   </div>
 </div>
@@ -761,7 +714,7 @@ function buildTrackPage(t){
 <div class="container">
   <div class="section-head"><span class="eyebrow">Other tracks</span><h2>Explore related tracks</h2></div>
   <div class="grid grid-3">${related}</div>
-  <div style="margin-top:30px"><a class="btn btn-blue" href="../tracks.html">See all six tracks &rarr;</a></div>
+  <div style="margin-top:30px"><a class="btn btn-blue" href="../tracks">See all six tracks &rarr;</a></div>
 </div>
 </section>`;
 
@@ -809,13 +762,597 @@ function buildTrackPage(t){
 function buildMeta(){
   const today = new Date().toISOString().slice(0,10);
   const tops = ["","tracks.html","about.html","pricing.html","enroll.html",
-                "faq.html","contact.html","blog.html","referral.html"];
+                "faq.html","contact.html","referral.html"];
   const urls = tops.map(u=>`  <url><loc>${SITE}/${u}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u===''?'1.0':'0.8'}</priority></url>`);
   TRACKS.forEach(t=>urls.push(`  <url><loc>${SITE}/courses/${t.slug}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`));
-  POSTS.forEach(p=>urls.push(`  <url><loc>${SITE}/blog/${p.slug}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`));
   write("sitemap.xml",`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`);
   write("robots.txt",`User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
   write("README.md",`# VAA Global Business School for Artisans\n\nStatic site — drop the folder onto Vercel, Netlify or any host.\n\n## Before going live\nOpen \`assets/js/main.js\` and set:\n1. \`VAA.PAYSTACK_PUBLIC_KEY\` — your live \`pk_live_...\` key\n2. \`VAA.APPS_SCRIPT_URL\` — your Google Apps Script endpoint\n\nBlog pages in \`/blog/\` are stubs — write the articles and deploy.\n`);
+}
+
+
+/* =====================================================================
+   MINI-MBA PAGE
+   ===================================================================== */
+function buildMBA(){
+  write("mini-mba.html", page({
+    path:"mini-mba.html", depth:0, crumb:"Mini-MBA",
+    title:"VAA Mini-MBA for Artisans | 3-Month Business Programme",
+    desc:"The VAA Mini-MBA is a full 3-month structured business programme for Nigerian artisans. Branding, pricing, marketing, client acquisition, money management — plus a capstone project and graduation certificate.",
+    kw:"mini mba for artisans Nigeria, artisan business programme Lagos, trade business training Nigeria",
+    paystack:true,
+    body:`<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner" style="grid-template-columns:1fr;max-width:820px">
+      <div class="hero-copy">
+        <span class="eyebrow on-dark">VAA Mini-MBA &mdash; The Complete Business Program</span>
+        <h1>Stop running your trade like a hobby. <em>Run it like a business.</em></h1>
+        <p class="lead" style="color:#b9c0ca;font-size:1.08rem;margin-bottom:28px">The VAA Mini-MBA is a full 3-month structured program for artisans who are serious about building a real, profitable, recognisable business. You come with the skill. You leave with a brand, a pricing system, a client pipeline, and a complete business plan — with a certificate to show for it.</p>
+        <div class="hero-tags" style="margin-bottom:28px">
+          <span class="hero-tag">3-Month program</span>
+          <span class="hero-tag">Weekly deliverables</span>
+          <span class="hero-tag">Capstone project</span>
+          <span class="hero-tag">Graduation ceremony</span>
+          <span class="hero-tag">Certificate included</span>
+        </div>
+        <div class="hero-cta" style="flex-wrap:wrap;gap:12px">
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+          <a class="btn btn-ghost on-dark btn-lg" href="tracks">Prefer a focused 5-week track instead?</a>
+        </div>
+        <div class="hero-proof" style="margin-top:40px">
+          <div class="stat"><b>6</b><span>Business modules</span></div>
+          <div class="stat"><b>6</b><span>Monthly deliverables</span></div>
+          <div class="stat"><b>1</b><span>Capstone project</span></div>
+          <div class="stat"><b>Certificate</b><span>On completion</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM AT A GLANCE -->
+<div class="glance">
+  <div class="container" style="padding:0 28px">
+    <div class="glance-inner">
+      <div class="glance-item"><div class="gi-label">Duration</div><div class="gi-val">3 Months</div></div>
+      <div class="glance-item"><div class="gi-label">Format</div><div class="gi-val">Live Online</div></div>
+      <div class="glance-item"><div class="gi-label">Sessions</div><div class="gi-val">Weekly</div></div>
+      <div class="glance-item"><div class="gi-label">Learning style</div><div class="gi-val">Practical &amp; Case-Based</div></div>
+      <div class="glance-item"><div class="gi-label">Final project</div><div class="gi-val">Business Capstone</div></div>
+      <div class="glance-item"><div class="gi-label">Certificate</div><div class="gi-val">Included</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <span class="eyebrow">The real gap</span>
+        <h2 style="margin:14px 0 20px">You know your trade.<br>Now learn how to make it a real business.</h2>
+        <p>Most Nigerian artisans are genuinely skilled. The problem is not the craft. It is everything around it — the pricing, the brand, the clients, the money. This program closes that gap.</p>
+        <div class="problem-cards" style="margin-top:28px">
+          <div class="problem-card"><span class="px">✕</span><p>You finish a job and have no idea if you actually made a profit</p></div>
+          <div class="problem-card"><span class="px">✕</span><p>Customers push your prices down and you always end up accepting less</p></div>
+          <div class="problem-card"><span class="px">✕</span><p>You have no brand — clients cannot tell why they should choose you over someone cheaper</p></div>
+          <div class="problem-card"><span class="px">✕</span><p>You depend on referrals and have no system to attract new clients on your own</p></div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">What this program gives you</span>
+        <h3 style="margin:14px 0 20px">A complete business and brand system for your trade</h3>
+        <div class="answer-cards">
+          <div class="answer-card"><span class="ck">✓</span><p>A real brand — name, identity, positioning — that makes clients choose you</p></div>
+          <div class="answer-card"><span class="ck">✓</span><p>A pricing structure you can defend confidently to any client</p></div>
+          <div class="answer-card"><span class="ck">✓</span><p>A client acquisition system that works without relying on word of mouth alone</p></div>
+          <div class="answer-card"><span class="ck">✓</span><p>Financial discipline so you know exactly what you earn and what you keep</p></div>
+          <div class="answer-card"><span class="ck">✓</span><p>Digital marketing skills — Instagram ads, Facebook ads, Google My Business, local SEO</p></div>
+        </div>
+        <div style="margin-top:28px">
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwho">
+  <div class="container">
+    <div class="forwho-inner">
+      <div class="reveal">
+        <span class="eyebrow">Who this is for</span>
+        <h2 style="margin:14px 0 16px">Built for artisans who already know their trade</h2>
+        <p>This is not for beginners learning a skill. This is for people who can already do the work — and are ready to build a real, profitable, recognisable business around it.</p>
+        <ul class="ticks" style="margin-top:24px">
+          <li>Tailors, fashion designers and seamstresses</li>
+          <li>Bakers, caterers and food vendors</li>
+          <li>Makeup artists and hair stylists</li>
+          <li>Electricians, plumbers, carpenters and tilers</li>
+          <li>Mechanics, auto electricians and phone repairers</li>
+          <li>Photographers, videographers and graphic designers</li>
+          <li>Farmers, agro-processors and food producers</li>
+          <li>Any skilled tradesperson ready to stop undercharging</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Where our students come from</span>
+        <h3 style="margin:14px 0 16px">Every trade. Every city.</h3>
+        <p>Our participants come from across Nigeria, at every stage of their trade — from two years in to twenty.</p>
+        <div class="trade-tags">
+          <span class="trade-tag">Fashion &amp; Textiles</span>
+          <span class="trade-tag">Food &amp; Hospitality</span>
+          <span class="trade-tag">Beauty &amp; Wellness</span>
+          <span class="trade-tag">Home Trades</span>
+          <span class="trade-tag">Automotive</span>
+          <span class="trade-tag">Creative Services</span>
+          <span class="trade-tag">Agriculture</span>
+          <span class="trade-tag">Lagos</span>
+          <span class="trade-tag">Abuja</span>
+          <span class="trade-tag">Port Harcourt</span>
+          <span class="trade-tag">Enugu</span>
+          <span class="trade-tag">Kano</span>
+        </div>
+        <div style="margin-top:32px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white)">
+          <p style="font-size:.88rem;font-style:italic;color:var(--ink);margin:0 0 10px">"I had been tailoring for 8 years. I just never knew how to price my work or keep clients coming back. This program changed everything about how I run my business."</p>
+          <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin:0">— Fashion track graduate, Lagos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">3-Month curriculum</span>
+      <h2 style="margin:14px 0 16px">What you will learn across 3 months</h2>
+      <p style="max-width:560px">Every week combines live sessions, real business cases and peer learning. Each of the six modules runs across two weeks, and each module ends with a deliverable you use directly in your trade.</p>
+    </div>
+
+    <div class="curr-rail">
+      <!-- MONTH 1 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine">
+          <div class="curr-num">01</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 1</div>
+          <h3>Brand Building &amp; Business Identity</h3>
+          <p class="curr-desc">Build the foundation. Define who you are as a business, who your ideal client is, and what makes you the obvious choice in your market.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">What is a Brand and Why it Changes What Clients Pay</div><div class="wk-sub">Brand vs. business, positioning, niche selection, and the link between branding and pricing power</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Creating Your Brand Identity</div><div class="wk-sub">Business name, logo, colours, fonts and visual identity using free tools — Canva, Adobe Express</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Brand Voice, Bio and Messaging</div><div class="wk-sub">Writing your brand statement, Instagram bio, and how to talk about your work so clients understand your value immediately</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Brand Application Lab</div><div class="wk-sub">Apply your brand across your phone, your space, your receipts and your social profiles — consistently</div></div></div>
+          </div>
+          <span class="curr-output">Weekly Deliverable: Complete Brand Identity Kit</span>
+        </div>
+      </div>
+
+      <!-- MONTH 2 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine"><div class="curr-num">02</div></div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 2</div>
+          <h3>Pricing, Packages &amp; Revenue Strategy</h3>
+          <p class="curr-desc">Stop guessing. Build a pricing structure based on real numbers, and learn to present it with confidence to any client.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">How to Calculate Your Real Price</div><div class="wk-sub">Cost of goods, labour, overhead, time — and how to add a real profit margin on top</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Packaging Your Services for Higher Value</div><div class="wk-sub">Service packages vs per-unit pricing, tiered offerings, and when each model earns you more</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Handling Objections Without Dropping Your Price</div><div class="wk-sub">The exact words to use when a client says "too expensive" — and how to hold your ground professionally</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Pricing Lab</div><div class="wk-sub">Build your actual price list, test it on real scenarios from your trade, and practise presenting it</div></div></div>
+          </div>
+          <span class="curr-output">Weekly Deliverable: Finalised Price List &amp; Service Packages</span>
+        </div>
+      </div>
+
+      <!-- MONTH 3 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine"><div class="curr-num">03</div></div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 3</div>
+          <h3>Marketing, Social Media &amp; Digital Ads</h3>
+          <p class="curr-desc">Get visible. Learn how to use Instagram, Facebook ads, Google My Business and local SEO to bring clients to you consistently — without a big budget.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">Content Strategy for Artisans</div><div class="wk-sub">What to post, when to post and how to turn followers into paying clients without sounding like you are always selling</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Instagram &amp; Facebook Ads on a Small Budget</div><div class="wk-sub">How to set up, target and run paid ads that reach local buyers — step by step from your phone, starting from ₦1,000 a day</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Google My Business &amp; Local SEO</div><div class="wk-sub">Set up your Google Business profile the right way, collect reviews, appear on Google Maps and show up when people search for your trade near them</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Marketing Lab</div><div class="wk-sub">Build a 30-day content calendar, set up one live ad and claim your Google Business profile during the session</div></div></div>
+          </div>
+          <span class="curr-output">Weekly Deliverable: 30-Day Marketing Plan &amp; Live Google Profile</span>
+        </div>
+      </div>
+
+      <!-- MONTH 4 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine"><div class="curr-num">04</div></div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 4</div>
+          <h3>Client Acquisition, Sales &amp; Business Systems</h3>
+          <p class="curr-desc">Build a client pipeline that works whether you are busy or slow. Stop relying on referrals alone and start running your business like a business.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">Building a Client Pipeline</div><div class="wk-sub">Where your best clients come from, how to reach more of them, and how to stay top of mind between jobs</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Converting Enquiries to Paid Bookings</div><div class="wk-sub">How to respond to leads, follow up without sounding desperate, take deposits and confirm bookings professionally</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Business Systems That Save You Time</div><div class="wk-sub">Simple tools for managing orders, tracking jobs, sending quotes and keeping records — all from your phone</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Client Management Lab</div><div class="wk-sub">Set up your booking system, write your follow-up scripts and build a referral program in one session</div></div></div>
+          </div>
+          <span class="curr-output">Weekly Deliverable: Client Acquisition System &amp; Booking Process</span>
+        </div>
+      </div>
+
+      <!-- MONTH 5 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine"><div class="curr-num">05</div></div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 5</div>
+          <h3>Money Management &amp; Financial Discipline</h3>
+          <p class="curr-desc">Know your numbers. Separate your money, track your profit, plan for slow months and start building something that actually grows.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">Separating Business and Personal Money</div><div class="wk-sub">Why mixing your money is the number one reason artisans stay broke — and the simple fix</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Tracking Income, Expenses and Profit</div><div class="wk-sub">Simple record-keeping using free apps like Bumpa and Kippa — know exactly what you make every week</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Planning for Slow Months and Big Expenses</div><div class="wk-sub">How to save from every job, build an emergency fund and plan your financial year so January never destroys you</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Finance Lab</div><div class="wk-sub">Build your personal financial tracker, calculate your real monthly cost of living and set your minimum monthly revenue target</div></div></div>
+          </div>
+          <span class="curr-output">Weekly Deliverable: Personal Finance Tracker &amp; Revenue Plan</span>
+        </div>
+      </div>
+
+      <!-- MONTH 6 -->
+      <div class="curr-month reveal">
+        <div class="curr-spine"><div class="curr-num">06</div></div>
+        <div class="curr-body">
+          <div class="curr-month-label">Week 6</div>
+          <h3>Capstone: Build Your Complete Business Plan</h3>
+          <p class="curr-desc">Bring everything together. You will build, present and defend a complete business plan for your trade — your brand, your pricing, your marketing and your financial projections.</p>
+          <div class="curr-weeks">
+            <div class="curr-week"><span class="wk-label">Week 1</span><div><div class="wk-title">Business Plan Workshop</div><div class="wk-sub">Combining your five months of deliverables into a single coherent business strategy document</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 2</span><div><div class="wk-title">Presentation Preparation</div><div class="wk-sub">How to present your business clearly and confidently — to clients, investors or anyone who asks</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 3</span><div><div class="wk-title">Peer Review and Feedback</div><div class="wk-sub">Present to your cohort and receive structured feedback before the final defence</div></div></div>
+            <div class="curr-week"><span class="wk-label">Week 4</span><div><div class="wk-title">Capstone Defence &amp; Graduation</div><div class="wk-sub">Final business presentation, assessment panel, certificate ceremony and cohort celebration</div></div></div>
+          </div>
+          <span class="curr-output">Final Deliverable: Complete Business Plan &amp; Graduation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALISATION TRACKS -->
+<section class="specs" id="tracks">
+  <div class="container">
+    <div class="specs-head section-head reveal">
+      <span class="eyebrow on-dark">Choose your track</span>
+      <h2 style="margin:14px 0 16px">One Mini-MBA. Six trade-specific tracks.</h2>
+      <p class="specs-head">Every participant joins the core program and chooses one specialisation track. All case studies, assignments and your capstone are based on your actual trade — not generic examples.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card reveal"><h4>✂ Fashion &amp; Beauty Business</h4><p>For tailors, makeup artists, hair stylists, nail technicians and beauty therapists.</p><span class="spec-tag">Track deliverable: Fashion Business Growth Plan</span></div>
+      <div class="spec-card reveal"><h4>🍰 Food &amp; Hospitality Business</h4><p>For caterers, bakers, food vendors, confectioners and event food service providers.</p><span class="spec-tag">Track deliverable: Food Business Growth Plan</span></div>
+      <div class="spec-card reveal"><h4>🔧 Home Trades Business</h4><p>For electricians, plumbers, carpenters, painters, tilers and POP artisans.</p><span class="spec-tag">Track deliverable: Trades Business Growth Plan</span></div>
+      <div class="spec-card reveal"><h4>🚗 Automotive &amp; Tech Repairs Business</h4><p>For mechanics, auto electricians, panel beaters and phone and laptop repairers.</p><span class="spec-tag">Track deliverable: Workshop Business Growth Plan</span></div>
+      <div class="spec-card reveal"><h4>🌱 Agriculture &amp; Agro-Processing Business</h4><p>For poultry farmers, fish farmers, crop producers and food processors.</p><span class="spec-tag">Track deliverable: Agro-Business Growth Plan</span></div>
+      <div class="spec-card reveal"><h4>📷 Creative Services Business</h4><p>For photographers, videographers, graphic designers and event decorators.</p><span class="spec-tag">Track deliverable: Creative Business Growth Plan</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPSTONE -->
+<section class="capstone" id="capstone">
+  <div class="container">
+    <div class="capstone-inner">
+      <div class="reveal">
+        <span class="cap-label">Capstone project</span>
+        <h2>The Artisan Business Launch Simulation</h2>
+        <p>Your final week brings the entire program together. You will build, present and defend a complete business plan for your own trade — as though pitching to a business partner, a bank, or your first major client.</p>
+        <div class="cap-focus">
+          <h4>Your capstone can focus on</h4>
+          <ul>
+            <li>Your current trade business — improving what you already have</li>
+            <li>A new service line you want to launch</li>
+            <li>Expanding into a new area or city</li>
+            <li>Moving from solo freelancer to a small team</li>
+            <li>Building a product from your trade skill (e.g. packaged food, branded clothing line)</li>
+          </ul>
+        </div>
+        <div style="margin-top:28px">
+          <a class="btn btn-primary btn-lg" href="#enroll">Apply for the Mini-MBA</a>
+        </div>
+      </div>
+      <div class="deliverables reveal">
+        <h4>Final deliverables</h4>
+        <div class="deliv-list">
+          <div class="deliv-item"><span class="deliv-num">01</span><div><h5>Brand Identity Document</h5><p>Your brand name, logo, visual identity and positioning statement</p></div></div>
+          <div class="deliv-item"><span class="deliv-num">02</span><div><h5>Pricing &amp; Revenue Model</h5><p>Full price list, packages and a 12-month revenue projection</p></div></div>
+          <div class="deliv-item"><span class="deliv-num">03</span><div><h5>Marketing Strategy</h5><p>Content plan, ad strategy, Google profile and 90-day client acquisition plan</p></div></div>
+          <div class="deliv-item"><span class="deliv-num">04</span><div><h5>Financial Plan</h5><p>Monthly expense tracking, savings plan and break-even calculation</p></div></div>
+          <div class="deliv-item"><span class="deliv-num">05</span><div><h5>Business Presentation</h5><p>A polished 10-slide deck you present to your cohort and assessment panel</p></div></div>
+          <div class="deliv-item"><span class="deliv-num">06</span><div><h5>Graduation &amp; Certificate</h5><p>Formal presentation, peer review and VAA Business School certificate</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU WALK AWAY WITH -->
+<section class="walkaway">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">What you leave with</span>
+      <h2 style="margin:14px 0 16px">A portfolio of proof. Not just a certificate.</h2>
+      <p style="max-width:560px">By the time you graduate you will have built six real business deliverables during the program, not assignments you throw away.</p>
+    </div>
+    <div class="walkaway-grid">
+      <div class="walkaway-card reveal"><div class="wc-num">01</div><h4>Complete Brand Identity Kit</h4><p>Logo, colours, fonts, bio and brand statement — ready to use across every platform</p></div>
+      <div class="walkaway-card reveal"><div class="wc-num">02</div><h4>Finalised Price List</h4><p>A real, defensible price list and service packages built from your actual costs</p></div>
+      <div class="walkaway-card reveal"><div class="wc-num">03</div><h4>30-Day Marketing Plan</h4><p>Content calendar, ad setup and a live Google My Business profile</p></div>
+      <div class="walkaway-card reveal"><div class="wc-num">04</div><h4>Client Acquisition System</h4><p>Booking process, follow-up scripts, deposit policy and referral program</p></div>
+      <div class="walkaway-card reveal"><div class="wc-num">05</div><h4>Personal Finance Tracker</h4><p>Weekly income and expense tracking, savings plan and monthly revenue target</p></div>
+      <div class="walkaway-card reveal"><div class="wc-num">06</div><h4>Complete Business Plan</h4><p>A 10-slide business presentation you can show to anyone — from clients to partners to lenders</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE -->
+<section class="certificate" id="certificate">
+  <div class="container">
+    <div class="cert-inner">
+      <div class="reveal">
+        <span class="eyebrow on-dark" style="color:rgba(255,255,255,.7)">Certificate</span>
+        <h2 style="margin:14px 0 16px">Earn the VAA Business School Mini-MBA Certificate</h2>
+        <p>Participants who complete all three months, pass monthly assessments, finish their specialisation track and present their capstone receive the official certificate.</p>
+        <div class="cert-name">VAA Mini-MBA Certificate</div>
+        <div class="cert-sub">Business, Branding &amp; Growth for Artisans</div>
+        <table class="cert-table">
+          <thead><tr><th>Assessment component</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly deliverables (6 total)</td><td>40%</td></tr>
+            <tr><td>Specialisation track project</td><td>20%</td></tr>
+            <tr><td>Capstone business plan</td><td>30%</td></tr>
+            <tr><td>Capstone presentation &amp; defence</td><td>10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cert-badge reveal">
+        <div style="font-size:2.8rem;margin-bottom:12px">🎓</div>
+        <div class="cert-badge-title">VAA Mini-MBA</div>
+        <div class="cert-badge-sub">Business, Branding &amp; Growth for Artisans</div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin:0 0 16px">Issued by VAA Global Business School for Artisans — a division of VAA Global Tech Hub</p>
+        <p style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Graduation classification</p>
+        <div class="cert-grade-grid">
+          <div class="cert-grade"><div class="grade">Distinction</div><div class="range">85% – 100%</div></div>
+          <div class="cert-grade"><div class="grade">Merit</div><div class="range">75% – 84%</div></div>
+          <div class="cert-grade"><div class="grade">Credit</div><div class="range">65% – 74%</div></div>
+          <div class="cert-grade"><div class="grade">Pass</div><div class="range">50% – 64%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALUMNI -->
+<section class="alumni">
+  <div class="container">
+    <div class="alumni-inner">
+      <div class="reveal">
+        <span class="eyebrow on-dark">Alumni network</span>
+        <h2 style="margin:14px 0 16px">Join the VAA Artisan Business Network</h2>
+        <p>Every graduate becomes part of a growing community of Nigerian artisans who run real, profitable, branded businesses.</p>
+        <div class="alumni-perks">
+          <div class="alumni-perk"><span class="pk-icon">🤝</span><p><strong>Peer community</strong> — Connect with other graduates in your trade and across trades</p></div>
+          <div class="alumni-perk"><span class="pk-icon">📢</span><p><strong>Business visibility</strong> — Get featured in VAA's social media and placed in the VAA Global Talent network</p></div>
+          <div class="alumni-perk"><span class="pk-icon">📚</span><p><strong>Continued learning</strong> — Access to future workshops, masterclasses and resources as a graduate</p></div>
+          <div class="alumni-perk"><span class="pk-icon">💼</span><p><strong>Referral income</strong> — Earn 10% commission for every artisan you refer to the program</p></div>
+        </div>
+      </div>
+      <div class="alumni-card reveal">
+        <h3>The VAA Artisan Business Network</h3>
+        <p>A long-term professional community for graduates to continue learning, referring clients, collaborating on projects and growing their businesses together.</p>
+        <div class="alumni-tag-wrap">
+          <span class="alumni-tag">Peer networking</span>
+          <span class="alumni-tag">Business referrals</span>
+          <span class="alumni-tag">Masterclasses</span>
+          <span class="alumni-tag">Group challenges</span>
+          <span class="alumni-tag">Expert sessions</span>
+          <span class="alumni-tag">Accountability groups</span>
+          <span class="alumni-tag">Client opportunities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Program investment</span>
+      <h2 style="margin:14px 0 8px">Enrol in the next Mini-MBA cohort</h2>
+      <p>Choose the payment plan that works for you. Every plan includes the complete 3-month program, all deliverables and your certificate. If you want just one focused topic, our <a href="tracks" style="color:var(--blue);font-weight:700">5-week business tracks</a> are available separately.</p>
+    </div>
+    <div class="pricing-grid" style="grid-template-columns:repeat(3,1fr)">
+
+      <!-- PLAN 1: FULL -->
+      <div class="price-card reveal">
+        <div class="price-tier">Option 1 &mdash; Best value</div>
+        <h3>Pay in Full</h3>
+        <div class="price-amount">&#8358;225,000</div>
+        <div class="price-per">one payment before the program starts</div>
+        <div class="price-divider"></div>
+        <ul class="price-list">
+          <li>Full 3-month Mini-MBA program</li>
+          <li>Live weekly sessions</li>
+          <li>Six monthly deliverables</li>
+          <li>Specialisation track access</li>
+          <li>Capstone project &amp; defence</li>
+          <li>Certificate of completion</li>
+          <li>Alumni network access</li>
+        </ul>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; pay in full</a>
+      </div>
+
+      <!-- PLAN 2: TWO PARTS -->
+      <div class="price-card featured reveal">
+        <div class="price-tier">Option 2 &mdash; Most popular</div>
+        <h3>Pay in Two Parts</h3>
+        <div class="price-amount"><em>&#8358;112,500</em></div>
+        <div class="price-per">now &middot; then &#8358;112,500 after month 1</div>
+        <div style="margin:10px 0 0;padding:10px 0;border-top:1px dashed var(--line)">
+          <span style="font-size:.8rem;font-weight:700;color:var(--blue)">Total: &#8358;225,000</span>
+        </div>
+        <div class="price-divider"></div>
+        <ul class="price-list">
+          <li>Full 3-month Mini-MBA program</li>
+          <li>Live weekly sessions</li>
+          <li>Six monthly deliverables</li>
+          <li>Specialisation track access</li>
+          <li>Capstone project &amp; defence</li>
+          <li>Certificate of completion</li>
+          <li>Alumni network access</li>
+        </ul>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; split payment</a>
+      </div>
+
+      <!-- PLAN 3: THREE PARTS -->
+      <div class="price-card reveal" style="border:1px solid var(--line)">
+        <div class="price-tier">Option 3 &mdash; Spread it out</div>
+        <h3>Pay in Three Parts</h3>
+        <div class="price-amount"><em style="color:var(--muted);font-size:1.2rem">&#8358;112,500</em></div>
+        <div class="price-per">now &middot; then &#8358;56,250 &times; 2 instalments</div>
+        <div style="margin:10px 0 0;padding:10px 0;border-top:1px dashed var(--line)">
+          <span style="font-size:.8rem;font-weight:700;color:var(--blue)">Total: &#8358;225,000 &nbsp;&middot;&nbsp; 50% + 25% + 25%</span>
+        </div>
+        <div class="price-divider"></div>
+        <ul class="price-list">
+          <li>Full 3-month Mini-MBA program</li>
+          <li>Live weekly sessions</li>
+          <li>Six monthly deliverables</li>
+          <li>Specialisation track access</li>
+          <li>Capstone project &amp; defence</li>
+          <li>Certificate of completion</li>
+          <li>Alumni network access</li>
+        </ul>
+        <a class="btn btn-primary btn-block btn-lg" href="#enroll">Enroll &amp; pay in 3 parts</a>
+      </div>
+
+    </div>
+
+    <!-- GROUP NOTE -->
+    <div style="margin-top:32px;padding:28px 32px;background:var(--ink);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px" class="reveal">
+      <div>
+        <h4 style="color:#fff;margin-bottom:4px">Group or corporate enrolment?</h4>
+        <p style="margin:0;font-size:.88rem;color:#9aa2ac">Enrol a group of artisans from your community, association or organisation and get custom pricing.</p>
+      </div>
+      <a class="btn btn-primary" href="contact">Talk to our team</a>
+    </div>
+  </div>
+</section>
+
+<!-- BROCHURE CTA -->
+<div id="brochure-cta" style="background:var(--blue);padding:60px 0">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px">
+      <div>
+        <h3 style="color:#fff;margin-bottom:6px">Download the program brochure</h3>
+        <p style="color:rgba(255,255,255,.7);margin:0">Full curriculum, deliverables, assessment structure and pricing — as a PDF you can read offline or share with someone.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="assets/VAA-Mini-MBA-Brochure.pdf" download>Download brochure (PDF)</a>
+    </div>
+  </div>
+</div>
+
+<!-- MINI-MBA ENROLMENT FORM -->
+<section id="enroll" style="padding:72px 0;background:#fff">
+<div class="container">
+<div class="course-layout" style="padding-top:0">
+
+  <!-- FORM -->
+  <div class="course-body">
+    <span class="eyebrow">Enroll in the Mini-MBA</span>
+    <h2 style="margin:12px 0 8px">Secure your spot in the next cohort</h2>
+    <p style="margin-bottom:28px">Fill in your details and choose your payment plan. Our team will reach you within two hours with your cohort start date and onboarding details.</p>
+
+    <div class="form-card">
+      <div id="mbaSuccessBox" style="display:none;padding:24px 0;text-align:center">
+        <div style="width:56px;height:56px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;margin:0 auto 14px">&#10003;</div>
+        <h3 style="margin-bottom:8px">You are in!</h3>
+        <p style="color:var(--muted)">We have your payment. Our team will reach you within two hours with your cohort details.</p>
+        <p class="form-note" id="mbaPayRef" style="margin-top:8px"></p>
+      </div>
+      <form id="mbaEnrollForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="mba-name">Full name</label>
+            <input id="mba-name" name="fullname" type="text" placeholder="e.g. Amaka Okonkwo" required>
+          </div>
+          <div class="field">
+            <label for="mba-phone">Phone number</label>
+            <input id="mba-phone" name="phone" type="tel" placeholder="0801 234 5678" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="mba-email">Email address</label>
+          <input id="mba-email" name="email" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="mba-plan">Choose your payment plan</label>
+          <select id="mba-plan" name="plan" required>
+            <option value="">Select a payment plan...</option>
+            <option value="full" data-price="225000">Pay in full &mdash; &#8358;225,000</option>
+            <option value="half-half" data-price="112500">50% now + 50% after month 1 &mdash; &#8358;112,500 today</option>
+            <option value="three-part" data-price="112500">50% + 25% + 25% &mdash; &#8358;112,500 today</option>
+          </select>
+        </div>
+        <div id="mbaAmountDisplay" style="display:none;margin:4px 0 16px;padding:14px 18px;background:var(--soft);border-radius:10px;border:1px solid var(--line)">
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)" id="mbaPlanLabel"></span>
+          <div style="font-size:1.6rem;font-weight:900;color:var(--ink);margin-top:4px" id="mbaPriceAmt"></div>
+        </div>
+        <div class="field">
+          <label for="mba-ref">Referral code <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <input id="mba-ref" name="refcode" type="text" placeholder="Enter code if you have one">
+        </div>
+        <button type="submit" id="mbaPayBtn" class="btn btn-primary btn-block btn-lg" style="margin-top:8px" disabled>Select a payment plan above</button>
+        <p class="form-note center" style="margin-top:12px">Secure payment via Paystack &middot; Certificate included</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ASIDE -->
+  <aside class="course-aside">
+    <div class="aside-card">
+      <div class="ac-top">
+        <span class="ribbon">Mini-MBA investment</span>
+        <div class="price">&#8358;225,000</div>
+        <small>3 months &middot; certificate included</small>
+      </div>
+      <div class="ac-body">
+        <ul class="ticks">
+          <li>All 6 business modules</li>
+          <li>Monthly deliverables you keep</li>
+          <li>Capstone project &amp; defence</li>
+          <li>Graduation ceremony</li>
+          <li>Certificate of completion</li>
+          <li>Alumni network access</li>
+        </ul>
+        <div style="margin-top:16px;padding:14px;background:var(--soft);border-radius:8px">
+          <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:8px">Payment plans</p>
+          <p style="font-size:.82rem;margin:0 0 4px;color:var(--ink)"><b>Full:</b> &#8358;225,000</p>
+          <p style="font-size:.82rem;margin:0 0 4px;color:var(--ink)"><b>50%+50%:</b> &#8358;112,500 &times; 2</p>
+          <p style="font-size:.82rem;margin:0;color:var(--ink)"><b>3 parts:</b> &#8358;112,500 + &#8358;56,250 + &#8358;56,250</p>
+        </div>
+        <p class="form-note" style="margin-top:14px">Not ready for the full program? Try a <a href="tracks" style="color:var(--blue);font-weight:700">5-week track</a> instead.</p>
+      </div>
+    </div>
+  </aside>
+
+</div>
+</div>
+</section>`
+  }));
 }
 
 /* =====================================================================  RUN */
@@ -827,8 +1364,8 @@ buildPricing();
 buildEnroll();
 buildFaq();
 buildContact();
-buildBlog();
 buildReferral();
+buildMBA();
 console.log("Building 6 track pages...");
 TRACKS.forEach(buildTrackPage);
 buildMeta();
