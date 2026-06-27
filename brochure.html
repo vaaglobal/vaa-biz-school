@@ -86,7 +86,7 @@
             <input id="b-company" name="company" type="text" tabindex="-1" autocomplete="off">
           </div>
           <p id="brochureError" class="form-note" style="display:none;color:#c0392b;margin:0 0 10px"></p>
-          <button type="submit" id="brochureBtn" class="btn btn-primary btn-block btn-lg">Send me the brochure</button>
+          <button type="submit" id="brochureBtn" class="btn btn-primary btn-block btn-lg">Download the brochure</button>
           <p class="form-note center" style="margin-top:12px">Free PDF &middot; no spam &middot; unsubscribe any time</p>
         </form>
       </div>
@@ -215,12 +215,25 @@
     }
 
     btn.disabled = true;
-    btn.textContent = "Preparing your download...";
+    btn.textContent = "Downloading...";
 
-    // Go to the download page (works whether or not a lead endpoint is set).
+    // Start the actual download now, while we still have the user's click
+    // (a real gesture). Browsers block downloads that fire on page load,
+    // which is why starting it here, on the button press, is reliable.
+    try {
+      var dl = document.createElement("a");
+      dl.href = "assets/VAA-Global-Brochure.pdf";
+      dl.setAttribute("download", "VAA-Global-Brochure.pdf");
+      document.body.appendChild(dl);
+      dl.click();
+      document.body.removeChild(dl);
+    } catch (e4) {}
+
+    // Then send them to the thank-you page (download keeps running in the
+    // browser's download manager even as the page navigates).
     setTimeout(function () {
       window.location.href = DOWNLOAD_PAGE + "?name=" + encodeURIComponent(name);
-    }, 500);
+    }, 1200);
   });
 })();
 </script>
