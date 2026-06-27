@@ -68,7 +68,7 @@
       <div class="section-head" style="margin-bottom:24px">
         <span class="eyebrow">Free download</span>
         <h1>Get the full VAA Global course brochure</h1>
-        <p>One PDF with everything: the six 5-week business tracks, the 3-month Mini-MBA, and the full VAA Global catalogue with prices. Tell us where to send it and the download opens on the next page.</p>
+        <p>One PDF with everything: the six 5-week business tracks, the 3-month Mini-MBA, and the full VAA Global catalogue with prices. Enter your name and email, and your download starts right away.</p>
       </div>
       <div class="form-card">
         <form id="brochureForm" novalidate>
@@ -217,9 +217,9 @@
     btn.disabled = true;
     btn.textContent = "Downloading...";
 
-    // Start the actual download now, while we still have the user's click
-    // (a real gesture). Browsers block downloads that fire on page load,
-    // which is why starting it here, on the button press, is reliable.
+    // Trigger the download from this real click (a genuine user gesture,
+    // which browsers require). We do NOT navigate away afterwards, because
+    // redirecting can cancel an in-flight download.
     try {
       var dl = document.createElement("a");
       dl.href = "assets/VAA-Global-Brochure.pdf";
@@ -229,11 +229,16 @@
       document.body.removeChild(dl);
     } catch (e4) {}
 
-    // Then send them to the thank-you page (download keeps running in the
-    // browser's download manager even as the page navigates).
-    setTimeout(function () {
-      window.location.href = DOWNLOAD_PAGE + "?name=" + encodeURIComponent(name);
-    }, 1200);
+    // Confirm on the same page, with a visible backup link in case the
+    // automatic download was blocked by the browser.
+    var first = name.split(" ")[0];
+    form.innerHTML =
+      '<div style="text-align:center;padding:6px 0">' +
+        '<div style="width:56px;height:56px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;margin:0 auto 14px">\u2713</div>' +
+        '<h3 style="margin-bottom:8px">Thank you, ' + first + '!</h3>' +
+        '<p class="form-note" style="margin-bottom:18px">Your download has started. If it did not, tap the button below.</p>' +
+        '<a class="btn btn-primary btn-block btn-lg" href="assets/VAA-Global-Brochure.pdf" download="VAA-Global-Brochure.pdf">Download the brochure (PDF)</a>' +
+      '</div>';
   });
 })();
 </script>
