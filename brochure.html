@@ -206,7 +206,9 @@
 
     // 3. Redirect to download page — triggers a real visible download button
     //    (browsers never block user-initiated navigation) and greets by name.
-    window.location.href = "brochure-download.html?name=" + encodeURIComponent(name);
+    setTimeout(function() {
+      window.location.assign("brochure-download.html?name=" + encodeURIComponent(name));
+    }, 50);
   });
 })();
 </script>
