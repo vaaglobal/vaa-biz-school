@@ -85,7 +85,7 @@
       <a href="pricing">Pricing</a>
       <a href="faq">FAQ</a>
       <a href="contact">Contact</a>
-            <a href="referral">Referral program</a>
+      <a href="referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
@@ -107,7 +107,9 @@
 <script src="assets/js/main.js"></script>
 <script>
 (function () {
-  // Greet by name (from the form redirect, or sessionStorage fallback).
+  var BROCHURE_PDF = "https://biz.vaaglobal.tech/assets/VAA-Global-Brochure.pdf";
+
+  // 1. Greet by name from ?name= param, fall back to sessionStorage.
   var name = "";
   try {
     var qp = new URLSearchParams(window.location.search);
@@ -124,6 +126,21 @@
     var g = document.getElementById("greeting");
     if (g) g.textContent = "Thank you, " + first + ". Here is your brochure.";
   }
+
+  // 2. Auto-trigger download. The user arrived here via a real navigation
+  //    (form submit → redirect), so browsers allow programmatic download.
+  //    setTimeout gives the page a moment to settle before firing.
+  setTimeout(function () {
+    try {
+      var a = document.createElement("a");
+      a.href = BROCHURE_PDF;
+      a.setAttribute("download", "VAA-Global-Brochure.pdf");
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (e3) {}
+  }, 500);
 })();
 </script>
 </body></html>
