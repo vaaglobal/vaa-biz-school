@@ -139,7 +139,7 @@
       <a href="pricing">Pricing</a>
       <a href="faq">FAQ</a>
       <a href="contact">Contact</a>
-            <a href="referral">Referral program</a>
+      <a href="referral">Referral program</a>
     </div>
     <div>
       <h5>Get in touch</h5>
@@ -160,17 +160,9 @@
 <script src="assets/js/courses-data.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-/* Brochure lead capture -> redirect to download page.
-   This form is intentionally NOT wired to main.js (no data-form attribute),
-   so it is handled entirely here.
-
-   TO COLLECT LEADS: paste your Google Apps Script Web App URL below.
-   The lead (name, email, source, timestamp) is sent as URL params via a
-   lightweight image beacon, which avoids CORS. Leave it empty and the page
-   still works as a gate — it just will not store the lead anywhere.        */
 (function () {
   var BROCHURE_ENDPOINT = "https://script.google.com/macros/s/AKfycbxag8tKFw3Re89sq3-68wUmKqH82jZczN_3-fAOncaAe9OqlGlXP-bERhlyjiHlgm8BMA/exec";
-  var DOWNLOAD_PAGE = "brochure-download";
+  var BROCHURE_PDF = "assets/VAA-Global-Brochure.pdf";
 
   var form = document.getElementById("brochureForm");
   if (!form) return;
@@ -189,55 +181,55 @@
     e.preventDefault();
     errEl.style.display = "none";
 
-    var name = (form.fullname.value || "").trim();
-    var email = (form.email.value || "").trim();
+    var name  = (form.fullname.value || "").trim();
+    var email = (form.email.value  || "").trim();
     var honey = (form.company.value || "").trim();
 
-    if (honey) return;                       // bot trap
-    if (name.length < 2) return showError("Please enter your name.");
+    if (honey) return;
+    if (name.length < 2)    return showError("Please enter your name.");
     if (!validEmail(email)) return showError("Please enter a valid email address.");
 
-    // Save so the download page can greet by name.
+    // 1. Fire lead beacon first — completely non-blocking, no waiting.
+    if (BROCHURE_ENDPOINT) {
+      try {
+        new Image().src = BROCHURE_ENDPOINT +
+          "?source=brochure" +
+          "&name="  + encodeURIComponent(name) +
+          "&email=" + encodeURIComponent(email) +
+          "&ts="    + Date.now();
+      } catch (e1) {}
+    }
+
+    // 2. Save for download page greeting.
     try {
       sessionStorage.setItem("vaa_brochure_lead", JSON.stringify({ name: name, email: email }));
     } catch (e2) {}
 
-    // Best-effort lead capture (non-blocking).
-    if (BROCHURE_ENDPOINT) {
-      try {
-        var img = new Image();
-        img.src = BROCHURE_ENDPOINT +
-          "?source=brochure" +
-          "&name=" + encodeURIComponent(name) +
-          "&email=" + encodeURIComponent(email) +
-          "&ts=" + Date.now();
-      } catch (e3) {}
+    // 3. Trigger download immediately — still inside the synchronous
+    //    click handler so browsers treat it as a trusted user gesture.
+    //    Falls back to window.open for iOS Safari which ignores the
+    //    download attribute on PDFs.
+    try {
+      var a = document.createElement("a");
+      a.href = BROCHURE_PDF;
+      a.setAttribute("download", "VAA-Global-Brochure.pdf");
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (e3) {
+      window.open(BROCHURE_PDF, "_blank");
     }
 
-    btn.disabled = true;
-    btn.textContent = "Downloading...";
-
-    // Trigger the download from this real click (a genuine user gesture,
-    // which browsers require). We do NOT navigate away afterwards, because
-    // redirecting can cancel an in-flight download.
-    try {
-      var dl = document.createElement("a");
-      dl.href = "assets/VAA-Global-Brochure.pdf";
-      dl.setAttribute("download", "VAA-Global-Brochure.pdf");
-      document.body.appendChild(dl);
-      dl.click();
-      document.body.removeChild(dl);
-    } catch (e4) {}
-
-    // Confirm on the same page, with a visible backup link in case the
-    // automatic download was blocked by the browser.
+    // 4. Show confirmation with a manual backup link.
     var first = name.split(" ")[0];
+    btn.disabled = true;
     form.innerHTML =
       '<div style="text-align:center;padding:6px 0">' +
-        '<div style="width:56px;height:56px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;margin:0 auto 14px">\u2713</div>' +
+        '<div style="width:56px;height:56px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;margin:0 auto 14px">&#10003;</div>' +
         '<h3 style="margin-bottom:8px">Thank you, ' + first + '!</h3>' +
-        '<p class="form-note" style="margin-bottom:18px">Your download has started. If it did not, tap the button below.</p>' +
-        '<a class="btn btn-primary btn-block btn-lg" href="assets/VAA-Global-Brochure.pdf" download="VAA-Global-Brochure.pdf">Download the brochure (PDF)</a>' +
+        '<p class="form-note" style="margin-bottom:18px">Your download has started. If it did not, use the button below.</p>' +
+        '<a class="btn btn-primary btn-block btn-lg" href="' + BROCHURE_PDF + '" target="_blank" rel="noopener">Download the brochure (PDF)</a>' +
       '</div>';
   });
 })();
