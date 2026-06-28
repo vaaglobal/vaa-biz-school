@@ -42,24 +42,79 @@
 </header>
 <div class="nav-backdrop"></div>
 
-<section style="padding-top:48px">
+<section style="padding-top:48px;padding-bottom:64px">
 <div class="container" style="max-width:720px">
-  <div class="form-card" style="text-align:center;border:2px solid var(--lime-deep)">
-    <div style="width:64px;height:64px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;margin:0 auto 18px">&#10003;</div>
-    <span class="eyebrow" style="justify-content:center">Your brochure is ready</span>
-    <h1 id="greeting" style="font-size:1.9rem;margin:6px 0 10px">Thank you. Here is your brochure.</h1>
-    <p style="color:var(--gray);max-width:520px;margin:0 auto 26px">Your download has started. If it did not, tap the button below. The PDF covers all six business tracks, the 3-month Mini-MBA and the full VAA Global course catalogue with prices.</p>
+  <div class="form-card" style="border:2px solid var(--lime-deep)">
 
-    <a id="downloadBtn" class="btn btn-primary btn-lg" href="assets/VAA-Global-Brochure.pdf" download="VAA-Global-Brochure.pdf">Download the brochure (PDF)</a>
+    <!-- Check + eyebrow -->
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:64px;height:64px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;margin:0 auto 16px">&#10003;</div>
+      <span class="eyebrow" style="justify-content:center">Your brochure is downloading</span>
+    </div>
 
-    <div style="margin-top:30px;padding-top:24px;border-top:1px solid var(--line)">
-      <p style="font-weight:700;margin-bottom:14px">Ready to take the next step?</p>
-      <a class="btn btn-dark" href="enroll">Enroll now</a>
+    <!-- Headline -->
+    <h1 id="greeting" style="font-size:2rem;line-height:1.2;margin:0 0 14px">
+      Good move. Most people stay stuck. You just took a step.
+    </h1>
+
+    <!-- Sub-copy -->
+    <p style="color:var(--gray);margin:0 0 10px;line-height:1.7">
+      Inside the PDF you will find the exact tracks, prices, and structure that have helped <strong>1,400+ graduates</strong> across Nigeria stop winging it and start running a real business.
+    </p>
+    <p style="color:var(--gray);margin:0 0 28px;line-height:1.7">
+      If your download did not start, use the button below.
+    </p>
+
+    <!-- Primary CTA -->
+    <a id="downloadBtn" class="btn btn-primary btn-lg btn-block" href="assets/VAA-Global-Brochure.pdf" download="VAA-Global-Brochure.pdf" style="margin-bottom:10px">
+      Download the brochure (PDF)
+    </a>
+    <p style="text-align:center;font-size:13px;color:var(--gray);margin:0 0 32px">
+      Free &middot; 8 pages &middot; no spam &middot; no obligation
+    </p>
+
+    <!-- Value stack divider -->
+    <div style="border-top:1px solid var(--line);padding-top:28px;margin-bottom:28px">
+      <p style="font-weight:800;font-size:1rem;margin:0 0 16px">What is inside:</p>
+      <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px">
+        <li style="display:flex;gap:10px;align-items:flex-start">
+          <span style="flex-shrink:0;width:20px;height:20px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">&#10003;</span>
+          <span><strong>6 business tracks</strong> &mdash; Fashion, Food, Home Trades, Automotive, Agriculture, Creative. Each is 5 weeks at &#8358;35,000.</span>
+        </li>
+        <li style="display:flex;gap:10px;align-items:flex-start">
+          <span style="flex-shrink:0;width:20px;height:20px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">&#10003;</span>
+          <span><strong>The 3-month Mini-MBA</strong> &mdash; the full system: branding, pricing, marketing, operations, finance, and leadership. &#8358;225,000 with payment plans available.</span>
+        </li>
+        <li style="display:flex;gap:10px;align-items:flex-start">
+          <span style="flex-shrink:0;width:20px;height:20px;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">&#10003;</span>
+          <span><strong>Prices, durations, and how to enrol</strong> &mdash; everything you need to make a decision today.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Social proof bar -->
+    <div style="background:var(--black,#000);border-radius:10px;padding:20px 24px;margin-bottom:28px;color:#fff;text-align:center">
+      <p style="margin:0 0 4px;font-size:13px;color:#aaa;letter-spacing:.5px;text-transform:uppercase">Trusted by</p>
+      <p style="margin:0;font-size:15px;line-height:1.6">
+        <strong style="color:var(--lime)">1,400+ graduates</strong> &nbsp;&middot;&nbsp;
+        <strong style="color:var(--lime)">Forbes-recognised</strong> &nbsp;&middot;&nbsp;
+        <strong style="color:var(--lime)">SDC Canada-endorsed</strong> &nbsp;&middot;&nbsp;
+        <strong style="color:var(--lime)">405+ placed</strong>
+      </p>
+    </div>
+
+    <!-- Next step CTA -->
+    <div style="text-align:center">
+      <p style="font-weight:700;margin:0 0 6px;font-size:1rem">Ready to stop reading and start building?</p>
+      <p style="color:var(--gray);font-size:14px;margin:0 0 18px">Seats fill fast. The next cohort may be closer than you think.</p>
+      <a class="btn btn-dark btn-lg" href="enroll" style="margin-right:10px">Enroll now</a>
       <a class="btn btn-ghost" href="tracks">Browse the tracks</a>
     </div>
+
   </div>
 </div>
 </section>
+
 <footer class="footer">
 <div class="container">
   <div class="footer-grid">
@@ -124,12 +179,10 @@
   if (name) {
     var first = name.split(" ")[0];
     var g = document.getElementById("greeting");
-    if (g) g.textContent = "Thank you, " + first + ". Here is your brochure.";
+    if (g) g.textContent = "Good move, " + first + ". Most people stay stuck. You just took a step.";
   }
 
-  // 2. Auto-trigger download. The user arrived here via a real navigation
-  //    (form submit → redirect), so browsers allow programmatic download.
-  //    setTimeout gives the page a moment to settle before firing.
+  // 2. Auto-trigger download.
   setTimeout(function () {
     try {
       var a = document.createElement("a");
