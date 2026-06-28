@@ -188,14 +188,19 @@
     if (name.length < 2)    return showError("Please enter your name.");
     if (!validEmail(email)) return showError("Please enter a valid email address.");
 
-    // 1. Fire lead beacon — non-blocking.
+    // 1. Fire POST to Apps Script — no-cors bypasses CORS preflight block.
     if (BROCHURE_ENDPOINT) {
       try {
-        new Image().src = BROCHURE_ENDPOINT +
-          "?source=brochure" +
-          "&name="  + encodeURIComponent(name) +
-          "&email=" + encodeURIComponent(email) +
-          "&ts="    + Date.now();
+        fetch(BROCHURE_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({
+            type: "brochure",
+            fullname: name,
+            email: email
+          })
+        });
       } catch (e1) {}
     }
 
@@ -204,8 +209,7 @@
       sessionStorage.setItem("vaa_brochure_lead", JSON.stringify({ name: name, email: email }));
     } catch (e2) {}
 
-    // 3. Redirect to download page — triggers a real visible download button
-    //    (browsers never block user-initiated navigation) and greets by name.
+    // 3. Redirect to download page — greets by name.
     setTimeout(function() {
       window.location.assign("brochure-download.html?name=" + encodeURIComponent(name));
     }, 50);
