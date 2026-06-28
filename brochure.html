@@ -209,10 +209,10 @@
       sessionStorage.setItem("vaa_brochure_lead", JSON.stringify({ name: name, email: email }));
     } catch (e2) {}
 
-    // 3. Redirect to download page — greets by name.
+    // 3. Redirect to download page — 800ms gives the fetch time to send before navigation cancels it.
     setTimeout(function() {
       window.location.assign("brochure-download.html?name=" + encodeURIComponent(name));
-    }, 50);
+    }, 800);
   });
 })();
 </script>
