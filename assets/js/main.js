@@ -152,9 +152,16 @@
       var price = opt ? Number(opt.getAttribute("data-price")) : 225000;
       var kobo  = price * 100;
 
+      // Spam gate fields (honeypot + render timestamp) — added to the HTML
+      // form but not previously read here, since this handler builds its
+      // payload from named fields individually rather than via FormData.
+      var website     = (form.elements.website || {}).value || "";
+      var formLoadedAt = (form.elements.formLoadedAt || {}).value || "";
+
       var payload = {
         type:"mini-mba", fullname:name, email:email, phone:phone,
-        plan:plan, refcode:ref, ts:new Date().toISOString()
+        plan:plan, refcode:ref, ts:new Date().toISOString(),
+        website:website, formLoadedAt:formLoadedAt
       };
 
       var noKey = !VAA.PAYSTACK_PUBLIC_KEY || VAA.PAYSTACK_PUBLIC_KEY.indexOf("REPLACE_WITH") > -1;
